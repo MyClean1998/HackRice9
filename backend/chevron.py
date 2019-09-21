@@ -1,7 +1,16 @@
+import random
+import pandas as pd
 
 class Chevron:
-    def __init__(self):
-        pass
+    def __init__(self, equipment_file, facility_file, worker_file, workOrder_file):
+
+        self.equip_failure_prob = {}
+
+    def initialize_facility_equipment(self, equipment_file, facility_file):
+        equipment_df = pd.read_csv(equipment_file)
+        facility_df = pd.read_csv(facility_file)
+        print(equipment_df)
+        print(facility_df)
 
 
 class Equipment:
@@ -14,19 +23,14 @@ class Equipment:
                               "Networking": [1, 3], "Vehicle": [3, 8], "HVAC": [4, 24],
                               "Conveyer": [5, 10]}
 
-    def __init__(self, name, status="idle"):
+    def __init__(self, name, probFailure, fixingTime, status="idle"):
         self.name = name
-        self.probFailure = Equipment.get_failure_prob(name)
-        self.fixingTime = Equipment.get_failure_prob(name)
+        self.probFailure = probFailure
+        self.fixingTime = fixingTime
         self.status = status
 
-    @staticmethod
-    def get_failure_prob(name):
-        return Equipment.equipment_failure_prob[name]
-
-    @staticmethod
-    def get_fixing_time(name):
-        return Equipment.equipment_fixing_time[name]
+    def get_fixingTime(self):
+        return random.randint(*self.fixingTime)
 
 
 class Facility:
@@ -42,3 +46,6 @@ class Worker:
 class WorkOrder:
     def __init__(self):
         pass
+
+if __name__ == '__main__':
+    chevron = Chevron()

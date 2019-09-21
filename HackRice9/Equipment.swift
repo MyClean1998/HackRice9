@@ -17,7 +17,7 @@ class Equipment {
     var fac3: [Int]
     var fac4: [Int]
     var fac5: [Int]
-    
+
     init() {
         self.equipmentNames = ["Pump", "Compressor", "Seperator", "Sensor", "Security", "Electricity", "Networking", "Vehicle", "HVAC", "Conveyer"]
         self.probabilityOfFailure = [0.00869565217391304, 0.0434782608695652,
