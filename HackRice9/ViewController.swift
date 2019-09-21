@@ -38,8 +38,17 @@ class ViewController: UIViewController {
             taskStack.addArrangedSubview(makeTaskWithText(text: task))
         }
         // Do the same intialization for workerStack
+        for worker in scheduler.UnassignedWorkers {
+            workerStack.addArrangedSubview(makeTaskWithText(text: worker))
+        }
     }
     
     // TODO: AddTask and AddWorker buttons
+    @IBOutlet weak var AddTask: UIButton!
+    @IBAction func AddTaskFunc(_ sender: UIButton) {
+    }
+    @IBOutlet weak var AddWorker: UIButton!
+    @IBAction func AddWorkerFunc(_ sender: UIButton) {
+    }
 }
 
