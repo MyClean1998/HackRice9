@@ -24,22 +24,18 @@ class ViewController: UIViewController {
     
     private var scheduler: Scheduler!
     
-    func makeTaskWithText(text:WorkOrder) -> UILabel {
+    func makeTaskWithText(text:String) -> UILabel {
         //Set the attributes of the label
         let myLabel = UILabel()
-//        myLabel.frame = CGRect(x: 30, y: 200, width: 150, height: 36)
-//        myLabel.font = UIFont(name: "Chalkduster", size: 18)
-        myLabel.text = text.orderNum
+        myLabel.text = text
         myLabel.textAlignment = .left
         return myLabel
     }
     
-        func makeWorkerWithText(text:Worker) -> UILabel {
+        func makeWorkerWithText(text:String) -> UILabel {
             //Set the attributes of the label
             let myLabel = UILabel()
-    //        myLabel.frame = CGRect(x: 30, y: 200, width: 150, height: 36)
-    //        myLabel.font = UIFont(name: "Chalkduster", size: 18)
-            myLabel.text = text.name
+            myLabel.text = text
             myLabel.textAlignment = .left
             return myLabel
         }
@@ -47,19 +43,18 @@ class ViewController: UIViewController {
     func updateViewFromModel() {
         for task in scheduler.UnfinishedTasks {
             // TODO: Replace this with a property of task
-            taskStack.addArrangedSubview(makeTaskWithText(text: task))
+            taskStack.addArrangedSubview(makeTaskWithText(text: task.orderNum))
         }
         // Do the same intialization for workerStack
         for worker in scheduler.UnassignedWorkers {
-            workerStack.addArrangedSubview(makeWorkerWithText(text: worker))
+            workerStack.addArrangedSubview(makeWorkerWithText(text: worker.name))
         }
     }
     
     // TODO: AddTask and AddWorker buttons
-    @IBOutlet weak var AddTask: UIButton!
     @IBAction func AddTaskFunc(_ sender: UIButton) {
     }
-    @IBOutlet weak var AddWorker: UIButton!
+    
     @IBAction func AddWorkerFunc(_ sender: UIButton) {
     }
 }
