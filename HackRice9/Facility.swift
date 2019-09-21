@@ -10,7 +10,12 @@ import Foundation
 
 class Facility{
     
-    var facilityNum: [String] = []
-    var location: [(latitude: Double, longitude: Double)] = []
+    var facilityNum: [String]
+    var location: [(latitude: Double, longitude: Double)]
     
+    // TODO: add input params to the initializer
+    init() {
+        facilityNum = []
+        location = []
+    }
 }

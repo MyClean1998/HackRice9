@@ -14,4 +14,8 @@ class Worker {
     var name: [String] = ["Bob", "Sally", "Marcus", "Jackie", "Jacob", "Lilly", "Mohammed", "Celeste", "Andrew", "Anh"]
     
     var shifts: [String] = ["Morning", "Evening"]
+    
+    init() {
+        
+    }
 }

@@ -12,9 +12,9 @@ import Foundation
 class Scheduler {
     // TODO: Create classes: WorkOrder, Worker, Equipment, Facility
     // Replace String with the corresponding classes
-    var UnfinishedTasks: [String]
-    var UnassignedWorkers: [String]
-    var TaskInProgress: [String]
+    var UnfinishedTasks: [String] // Change this to [WorkOrder]
+    var UnassignedWorkers: [String] // ... to [Worker]
+    var TaskInProgress: [String]    // ... to [TaskInProgress]
 
     init() {
         UnfinishedTasks = ["t1", "t3", "t4"]
@@ -40,6 +40,7 @@ class Scheduler {
         //TODO
     }
     
+    // Assign a task to a worker,
     func assignTask(from task: String, to worker: String) {
         //TODO
     }
