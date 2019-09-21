@@ -5,7 +5,6 @@ class QLearningAgent:
     def __init__(self, discount, lr, epsilon, num_training, evoke_envir, is_training=False):
         self.is_training = is_training
         self.discount = discount
-        self.learning_rate = lr
         self.epsilon = epsilon
         self.evoke_envir = evoke_envir
         self.num_training = num_training
@@ -47,10 +46,11 @@ class QLearningAgent:
     
     def update(self, state, action, nextState, reward):
         # TODO: update the feature-based q-value.
-        diff = reward + self.discount * self.computeValueFromQValues(nextState) - self.getQValue(state, action)
-        self.q_value_model.backward()
+        expected = reward + self.discount * self.computeValueFromQValues(nextState)
+        self.q_value_model.backward(expected)
 
     def do_action(self, state):
+        self.cur_episode += 1
         self.update(state)
         self.evoke_envir(self.get_action(state))
     
