@@ -12,8 +12,8 @@ import Foundation
 class Scheduler {
     // TODO: Create classes: WorkOrder, Worker, Equipment, Facility
     // Replace String with the corresponding classes
-    var UnfinishedTasks: [WorkOrder] // Change this to [WorkOrder]
-    var UnassignedWorkers: [Worker] // ... to [Worker]
+    var unfinishedTasks: [WorkOrder] // Change this to [WorkOrder]
+    var unassignedWorkers: [Worker] // ... to [Worker]
     var tip: TaskInProgress    // ... to [TaskInProgress]
     let order1 = [WorkOrder(orderNum: "1001",facNum: 1,equipmentType: "Pump",equipmentID: "P032",priority: 5,timeToComplete: 3)]
     let bob = Worker(equipment: ["Sensor", "Security", "Networking"], name: "Bob", shifts: "Morning")
@@ -21,32 +21,39 @@ class Scheduler {
     let order2 = WorkOrder(orderNum: "1002",facNum: 3,equipmentType: "Conveyer",equipmentID: "Con391",priority: 1,timeToComplete: 9)
 
     init() {
-        self.UnfinishedTasks = order1
-        self.UnassignedWorkers = workers
+        self.unfinishedTasks = order1
+        self.unassignedWorkers = workers
         self.tip = TaskInProgress(task: order2, worker: bob)
     }
     
     
     // Replace all the "String" with the corresponding class name
-    func addTask(withTaskInfo task: String) {
-        //TODO
-        
+    func addTask(withTaskInfo task: WorkOrder) {
+        unfinishedTasks.append(task)
     }
     
-    func removeTask(withTaskInfo task: String) {
+    func addSampleTask() {
+        unfinishedTasks.append(order2)
+    }
+ 
+    func removeTask(withTaskInfo task: WorkOrder) {
         //TODO
     }
     
-    func addWorker(withWorkerInfo worker: String) {
-        //TODO
+    func addWorker(withWorkerInfo worker: Worker) {
+        unassignedWorkers.append(worker)
     }
     
-    func removeWorker(withWorkerInfo worker: String) {
+    func addSampleWorker() {
+        unassignedWorkers.append(workers[0])
+    }
+    
+    func removeWorker(withWorkerInfo worker: Worker) {
         //TODO
     }
     
     // Assign a task to a worker,
-    func assignTask(from task: String, to worker: String) {
+    func assignTask(from task: WorkOrder, to worker: Worker) {
         //TODO
     }
 }
