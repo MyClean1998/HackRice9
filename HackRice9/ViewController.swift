@@ -45,6 +45,10 @@ class ViewController: UIViewController {
     
     // TODO: AddTask and AddWorker buttons
     @IBOutlet weak var AddTask: UIButton!
+    @IBAction func AddTaskFunc(_ sender: UIButton) {
+    }
     @IBOutlet weak var AddWorker: UIButton!
+    @IBAction func AddWorkerFunc(_ sender: UIButton) {
+    }
 }
 

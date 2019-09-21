@@ -10,5 +10,7 @@ import Foundation
 
 // TODO: Do the same thing as the other three classes
 class WorkOrder {
-    
+    var orderNum: [Int]
+    var facility: Facility
+    var equipment: Equipment
 }
