@@ -25,4 +25,6 @@ class Equipment {
     var fac3: [Int] = [4, 5, 3, 4, 1, 1, 4, 3, 6, 2]
     var fac4: [Int] = [6, 5, 2, 0, 1, 7, 5, 0, 6, 1]
     var fac5: [Int] = [7, 9, 3, 2, 1, 22, 8, 6, 4, 3]
+    
+    init() {}
 }
