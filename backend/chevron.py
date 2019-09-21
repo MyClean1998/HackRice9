@@ -98,8 +98,12 @@ class Worker:
     
 
 class WorkOrder:
-    def __init__(self):
-        pass
+    def __init__(self, id, equipment, priority, duration, submission_time):
+        self.id = id
+        self.equipment = equipment
+        self.priority = priority
+        self.duration = duration
+        self.submission_time = submission_time
 
 
 if __name__ == '__main__':
