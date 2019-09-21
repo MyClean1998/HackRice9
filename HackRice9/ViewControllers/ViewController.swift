@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         let tabbar = tabBarController as! MainTabController
         scheduler = tabbar.scheduler
+        tabbar.printLogMessage(msg: "loaded")
         updateViewFromModel()
     }
     

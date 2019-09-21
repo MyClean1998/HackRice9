@@ -17,7 +17,8 @@ class MainTabController: UITabBarController {
     lazy var scheduler = Scheduler()
     
     // Print log message in the log panel
-    func printLogMessage() {
+    func printLogMessage(msg: String) {
+//        for v in viewControllers
         
     }
 }
