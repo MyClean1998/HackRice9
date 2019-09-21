@@ -13,4 +13,11 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    lazy var scheduler = Scheduler()
+    
+    // Print log message in the log panel
+    func printLogMessage() {
+        
+    }
 }
