@@ -31,6 +31,11 @@ class Chevron:
             for idx, row in fac_equip_df.iterrows():
                 fac_equip[row["Equipment"]] = int(row[fac_name])
             self.fac_equip_info[fac_name] = fac_equip
+        
+    def update_envir(self, action):
+        # TODO: update the environment
+        pass
+
 
         # print(self.equip_failure_prob, self.equip_fixing_time)
         # print(self.fac_loc, self.fac_equip_info)
