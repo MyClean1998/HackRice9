@@ -24,15 +24,25 @@ class ViewController: UIViewController {
     
     private var scheduler: Scheduler!
     
-    func makeTaskWithText(text:String) -> UILabel {
+    func makeTaskWithText(text:WorkOrder) -> UILabel {
         //Set the attributes of the label
         let myLabel = UILabel()
 //        myLabel.frame = CGRect(x: 30, y: 200, width: 150, height: 36)
 //        myLabel.font = UIFont(name: "Chalkduster", size: 18)
-        myLabel.text = text
+        myLabel.text = text.orderNum
         myLabel.textAlignment = .left
         return myLabel
     }
+    
+        func makeWorkerWithText(text:Worker) -> UILabel {
+            //Set the attributes of the label
+            let myLabel = UILabel()
+    //        myLabel.frame = CGRect(x: 30, y: 200, width: 150, height: 36)
+    //        myLabel.font = UIFont(name: "Chalkduster", size: 18)
+            myLabel.text = text.name
+            myLabel.textAlignment = .left
+            return myLabel
+        }
     
     func updateViewFromModel() {
         for task in scheduler.UnfinishedTasks {
@@ -41,7 +51,7 @@ class ViewController: UIViewController {
         }
         // Do the same intialization for workerStack
         for worker in scheduler.UnassignedWorkers {
-            workerStack.addArrangedSubview(makeTaskWithText(text: worker))
+            workerStack.addArrangedSubview(makeWorkerWithText(text: worker))
         }
     }
     

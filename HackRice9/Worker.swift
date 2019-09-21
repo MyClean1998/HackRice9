@@ -10,13 +10,15 @@ import Foundation
 
 class Worker {
     var equipment: [String]
-    var name: [String]
-    var shifts: [String]
+    var name: String
+    var shifts: String
     
-    init() {
-        self.equipment = ["Pump", "Compressor", "Seperator", "Sensor", "Security", "Electricity", "Networking", "Vehicle", "HVAC", "Conveyer"]
-        self.name = ["Bob", "Sally", "Marcus", "Jackie", "Jacob", "Lilly", "Mohammed", "Celeste", "Andrew", "Anh"]
-        self.shifts = ["Morning", "Evening"]
-        
+    init(equipment: [String], name: String, shifts: String) {
+//        self.equipment = ["Pump", "Compressor", "Seperator", "Sensor", "Security", "Electricity", "Networking", "Vehicle", "HVAC", "Conveyer"]
+//        self.name = ["Bob", "Sally", "Marcus", "Jackie", "Jacob", "Lilly", "Mohammed", "Celeste", "Andrew", "Anh"]
+//        self.shifts = ["Morning", "Evening"]
+        self.equipment = equipment
+        self.name = name
+        self.shifts = shifts
     }
 }
