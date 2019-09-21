@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="269.56521739130437" y="71.651785714285708"/>
+            <point key="canvasLocation" x="230" y="140"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="B2O-gT-p5B">
@@ -128,7 +128,7 @@
         <!--Item 1-->
         <scene sceneID="Rsd-TQ-07z">
             <objects>
-                <viewController id="9CK-EQ-uNY" sceneMemberID="viewController">
+                <viewController id="9CK-EQ-uNY" customClass="TaskInProgressViewController" customModule="HackRice9" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bpp-Wi-Tsd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,7 +153,7 @@
         <!--Main Tab Controller-->
         <scene sceneID="rni-fN-jbe">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mMi-RG-UhW" customClass="MainTabController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mMi-RG-UhW" customClass="MainTabController" customModule="HackRice9" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCa-9u-aZW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

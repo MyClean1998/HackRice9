@@ -14,13 +14,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let tabbar = tabBarController as! MainTabController
+        scheduler = tabbar.scheduler
         updateViewFromModel()
     }
     
     @IBOutlet weak var taskStack: UIStackView!
     @IBOutlet weak var workerStack: UIStackView!
     
-    private lazy var scheduler = Scheduler()
+    private var scheduler: Scheduler!
     
     func makeTaskWithText(text:String) -> UILabel {
         //Set the attributes of the label
