@@ -1,5 +1,6 @@
 import random
 import pandas as pd
+from workScheduling import WorkSchedulingState
 
 
 class Chevron:
@@ -9,13 +10,16 @@ class Chevron:
 
         self.fac_loc = {}
         self.fac_equip_info = {}
-        self.facilities = []
+        self.work_state = WorkSchedulingState()
 
+        self.facilities = []
         self.workers = []
+        self.work_orders = []
 
         self.load_facility_equipment_info(equipment_file, facility_file)
         self.initialize_facility()
         self.initialize_workers(worker_file)
+        self.
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
@@ -47,11 +51,20 @@ class Chevron:
         # print(self.facilities)
 
     def initialize_workers(self, worker_file):
-        worker_df = pd.read_csv(worker_file, header=1).iloc[:, 1:]
-        print(worker_df)
+        worker_df = pd.read_csv(worker_file).iloc[:, 1:]
         for idx, row in worker_df.iterrows():
             name = row["Name"]
-            # certification = row[]
+            certification = row["Equipment Certification(s)"]
+            shift = row["Shifts"]
+            worker = Worker(name, certification, shift)
+            self.workers.append(worker)
+        # print(self.workers)
+    
+    def initialize_work_orders(self, workOrder_file):
+        workOrder_df = pd.read_csv(workOrder_file, header=1).iloc[:, 1:]
+        for idx, row in workOrder_df.iterrows():
+            pass
+
 
 
 class Equipment:
@@ -63,6 +76,12 @@ class Equipment:
 
     def get_fixing_time(self):
         return random.randint(*self.fixing_time)
+
+    def put_towork(self):
+        self.status = "busy"
+    
+    def is_available(self):
+        return self.status == "idle"
 
 
 class Facility:
@@ -79,8 +98,17 @@ class Facility:
             self.equipments[equip_name] = [Equipment(equip_name, i, equip_failure_prob[equip_name], equip_fixing_time[equip_name]) for i in range(num_equipment)]
         # print(self.equipments)
 
-    def get_equipment_availability(self, equip_name):
-        pass
+    def has_available_equipment(self, equip_name):
+        available = False
+        for equip in self.equipments[equip_name]:
+            if equip.is_available():
+                return True
+        return False
+
+    def put_equipment_towork(self, equip_name):
+        for equip in self.equipments[equip_name]:
+            if equip.is_available():
+                equip.put_towork()
 
 
 class Worker:
@@ -89,6 +117,15 @@ class Worker:
         self.certification = certification
         self.shift = shift
         self.status = status
+
+    def change_status(self, new_status):
+        self.status = new_status
+    
+    def is_available(self):
+        return self.status == "idle"
+
+    def put_towork(self):
+        self.status = "busy"
     
 
 class WorkOrder:
