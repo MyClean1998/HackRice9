@@ -79,8 +79,8 @@ class Facility:
             self.equipments[equip_name] = [Equipment(equip_name, i, equip_failure_prob[equip_name], equip_fixing_time[equip_name]) for i in range(num_equipment)]
         # print(self.equipments)
 
-    # def get_equipment_availability(self, equip_name):
-
+    def get_equipment_availability(self, equip_name):
+        pass
 
 
 class Worker:
