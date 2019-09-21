@@ -15,9 +15,9 @@ class TaskInProgress {
     var status: String
     
     init() {
-        task = WorkOrder()
-        worker = Worker()
-        timeLeft = 0
-        status = "IP"
+        self.task = WorkOrder()
+        self.worker = Worker()
+        self.timeLeft = 0
+        self.status = "IP"
     }
 }

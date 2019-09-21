@@ -14,8 +14,8 @@ class Facility{
     var location: [(latitude: Double, longitude: Double)]
     
     // TODO: add input params to the initializer
-    init() {
-        facilityNum = []
-        location = []
+    init(facilityNum: [String], location: [(latitude: Double, longitude: Double)]) {
+        self.facilityNum = facilityNum
+        self.location = location
     }
 }
