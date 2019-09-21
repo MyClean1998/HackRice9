@@ -10,7 +10,22 @@ import Foundation
 
 // TODO: Do the same thing as the other three classes
 class WorkOrder {
-    var orderNum: [Int]
-    var facility: Facility
-    var equipment: Equipment
+    var orderNum: Int
+    var facilities = Facility()
+    var facility: String
+//    var equipment: Equipment
+    var equipmentType: String
+    var equipmentID: String
+    var priority: Int
+    var timeToComplete: Int
+//    var submissionTimeStamp: String
+    
+    init(orderNum: Int, facNum: Int, equipmentType: String, equipmentID: String, priority: Int, timeToComplete: Int) {
+        self.orderNum = orderNum
+        self.facility = facilities.facilityNum[facNum]
+        self.equipmentType = equipmentType
+        self.equipmentID = equipmentID
+        self.priority = priority
+        self.timeToComplete = timeToComplete
+    }
 }
