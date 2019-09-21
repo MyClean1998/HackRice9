@@ -1,16 +1,39 @@
 import random
 import pandas as pd
 
+
 class Chevron:
     def __init__(self, equipment_file, facility_file, worker_file, workOrder_file):
-
         self.equip_failure_prob = {}
+        self.equip_fixing_time = {}
+
+        self.fac_loc = {}
+        self.fac_equip_info = {}
+        self.initialize_facility_equipment(equipment_file, facility_file)
 
     def initialize_facility_equipment(self, equipment_file, facility_file):
-        equipment_df = pd.read_csv(equipment_file)
-        facility_df = pd.read_csv(facility_file)
-        print(equipment_df)
-        print(facility_df)
+        equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
+        facility_df = pd.read_csv(facility_file, header=1).iloc[:, 1:]
+
+        for idx, row in equipment_df.iterrows():
+            name = row["Equipment"]
+            failureProb = float(row["Probability of Failure"])
+            fixingTime = list(map(lambda x: int(x), row["Hours to Fix (range)"].split("-")))
+            self.equip_failure_prob[name] = failureProb
+            self.equip_fixing_time[name] = fixingTime
+
+        for idx, row in facility_df.iterrows():
+            fac_name = row["Facility"]
+            location = (float(row["Latitude"]), float(row["Longitude"]))
+            self.fac_loc[fac_name] = location
+            fac_equip = {}
+            fac_equip_df = equipment_df[["Equipment", fac_name]]
+            for idx, row in fac_equip_df.iterrows():
+                fac_equip[row["Equipment"]] = int(row[fac_name])
+            self.fac_equip_info[fac_name] = fac_equip
+
+        # print(self.equip_failure_prob, self.equip_fixing_time)
+        # print(self.fac_loc, self.fac_equip_info)
 
 
 class Equipment:
@@ -34,7 +57,8 @@ class Equipment:
 
 
 class Facility:
-    def __init__(self, position, fac_equipment):
+    def __init__(self, name, position, fac_equipment):
+        self.name = name
         self.position = position
         self.equipments = fac_equipment
 
@@ -48,4 +72,4 @@ class WorkOrder:
         pass
 
 if __name__ == '__main__':
-    chevron = Chevron()
+    chevron = Chevron("equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
