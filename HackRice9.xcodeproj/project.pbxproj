@@ -18,6 +18,7 @@
 		8682EA2023362262006EC627 /* TaskInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA1F23362262006EC627 /* TaskInProgress.swift */; };
 		8682EA22233622D6006EC627 /* WorkOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA21233622D6006EC627 /* WorkOrder.swift */; };
 		8682EA242336B09C006EC627 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA232336B09C006EC627 /* MainTabController.swift */; };
+		8682EA262336B3AC006EC627 /* TaskInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */; };
 		8EB843C42335FEA50083EC91 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C32335FEA50083EC91 /* Worker.swift */; };
 		8EB843C62336053E0083EC91 /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C52336053E0083EC91 /* Equipment.swift */; };
 		8EB843C82336095E0083EC91 /* Facility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C72336095E0083EC91 /* Facility.swift */; };
@@ -58,6 +59,7 @@
 		8682EA1F23362262006EC627 /* TaskInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInProgress.swift; sourceTree = "<group>"; };
 		8682EA21233622D6006EC627 /* WorkOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrder.swift; sourceTree = "<group>"; };
 		8682EA232336B09C006EC627 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInProgressViewController.swift; sourceTree = "<group>"; };
 		8EB843C32335FEA50083EC91 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		8EB843C52336053E0083EC91 /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		8EB843C72336095E0083EC91 /* Facility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facility.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				8682EA1F23362262006EC627 /* TaskInProgress.swift */,
 				8682EA21233622D6006EC627 /* WorkOrder.swift */,
 				8682EA232336B09C006EC627 /* MainTabController.swift */,
+				8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */,
 			);
 			path = HackRice9;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				8682E9F22335C368006EC627 /* ViewController.swift in Sources */,
 				8682EA242336B09C006EC627 /* MainTabController.swift in Sources */,
 				8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */,
+				8682EA262336B3AC006EC627 /* TaskInProgressViewController.swift in Sources */,
 				8EB843C62336053E0083EC91 /* Equipment.swift in Sources */,
 				8682EA2023362262006EC627 /* TaskInProgress.swift in Sources */,
 			);
@@ -462,6 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = HackRice9/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -479,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = HackRice9/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
