@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 class QLearningAgent:
 
@@ -10,7 +11,19 @@ class QLearningAgent:
         self.num_training = num_training
         self.q_value_model = None
         self.cur_episode = 0
-    
+        self.equips = []
+        self.num_equips = len(self.equips)
+        
+    def get_q_features(self, state, action):
+        equip_job_todo = state.get_jobs_with_equip("pending")
+        equit_job_doing = state.get_jobs_with_equip("in progress")
+        features = np.zeros((len(equip_job_todo.keys()), 6))
+        for i in range(self.num_equips):
+            jobs_todo = equip_job_todo[self.equips[i]]
+            jobs_doing = equit_job_doing[self.equips[i]]
+            # TODO: put all features into mat
+        return features.flatten()
+            
     def is_training(self):
         return self.is_training
     
@@ -45,13 +58,13 @@ class QLearningAgent:
         return self.compute_action_from_q_value(state)
     
     def update(self, state, action, nextState, reward):
-        # TODO: update the feature-based q-value.
         expected = reward + self.discount * self.computeValueFromQValues(nextState)
         self.q_value_model.backward(expected)
 
     def do_action(self, state):
         self.cur_episode += 1
-        self.update(state)
+        if self.is_training:
+            self.update(state)
         self.evoke_envir(self.get_action(state))
     
 
