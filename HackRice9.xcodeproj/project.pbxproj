@@ -21,8 +21,9 @@
 		8682EA2023362262006EC627 /* TaskInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA1F23362262006EC627 /* TaskInProgress.swift */; };
 		8682EA22233622D6006EC627 /* WorkOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA21233622D6006EC627 /* WorkOrder.swift */; };
 		8682EA242336B09C006EC627 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA232336B09C006EC627 /* MainTabController.swift */; };
-		8682EA262336B3AC006EC627 /* TaskInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */; };
 		8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA2923370B53006EC627 /* HomeViewController.swift */; };
+		86FD83AC2337554800E3891A /* helloworld.py in Resources */ = {isa = PBXBuildFile; fileRef = 86FD83AB2337554800E3891A /* helloworld.py */; };
+		86FD83C623375FF100E3891A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FD83C523375FF100E3891A /* HealthKit.framework */; };
 		8E64624123372DBB000D6A27 /* UnassignedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */; };
 		8E64624323372DCA000D6A27 /* UnassignedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */; };
 		8E646245233746B6000D6A27 /* InProgressTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E646244233746B6000D6A27 /* InProgressTaskController.swift */; };
@@ -70,8 +71,10 @@
 		8682EA1F23362262006EC627 /* TaskInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInProgress.swift; sourceTree = "<group>"; };
 		8682EA21233622D6006EC627 /* WorkOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrder.swift; sourceTree = "<group>"; };
 		8682EA232336B09C006EC627 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
-		8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInProgressViewController.swift; sourceTree = "<group>"; };
 		8682EA2923370B53006EC627 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		86FD83AB2337554800E3891A /* helloworld.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = helloworld.py; path = "../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/308159042d47eaa44f9a939470df1637/Message/MessageTemp/ff03cd75b3ed16baacfb343b1a97faf7/File/helloworld.py"; sourceTree = "<group>"; };
+		86FD83C323375FF000E3891A /* HackRice9.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackRice9.entitlements; sourceTree = "<group>"; };
+		86FD83C523375FF100E3891A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnassignedTaskCell.swift; sourceTree = "<group>"; };
 		8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnassignedTaskController.swift; sourceTree = "<group>"; };
 		8E646244233746B6000D6A27 /* InProgressTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTaskController.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FD83C623375FF100E3891A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +119,6 @@
 				8E646244233746B6000D6A27 /* InProgressTaskController.swift */,
 				17274CC12336D6E100326986 /* LogViewController.swift */,
 				8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */,
-				8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -127,6 +130,7 @@
 				8682EA032335C36C006EC627 /* HackRice9Tests */,
 				8682EA0E2335C36C006EC627 /* HackRice9UITests */,
 				8682E9ED2335C368006EC627 /* Products */,
+				86FD83C423375FF100E3891A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +147,7 @@
 		8682E9EE2335C368006EC627 /* HackRice9 */ = {
 			isa = PBXGroup;
 			children = (
+				86FD83C323375FF000E3891A /* HackRice9.entitlements */,
 				8682E9EF2335C368006EC627 /* AppDelegate.swift */,
 				17274CC62336D81D00326986 /* ViewControllers */,
 				8682E9F32335C368006EC627 /* Main.storyboard */,
@@ -158,6 +163,7 @@
 				8EB843C52336053E0083EC91 /* Equipment.swift */,
 				8EB843C72336095E0083EC91 /* Facility.swift */,
 				8682EA1F23362262006EC627 /* TaskInProgress.swift */,
+				86FD83AB2337554800E3891A /* helloworld.py */,
 				8682EA21233622D6006EC627 /* WorkOrder.swift */,
 			);
 			path = HackRice9;
@@ -179,6 +185,14 @@
 				8682EA112335C36C006EC627 /* Info.plist */,
 			);
 			path = HackRice9UITests;
+			sourceTree = "<group>";
+		};
+		86FD83C423375FF100E3891A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86FD83C523375FF100E3891A /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FD83AC2337554800E3891A /* helloworld.py in Resources */,
 				8682E9FA2335C36B006EC627 /* LaunchScreen.storyboard in Resources */,
 				8682E9F72335C36B006EC627 /* Assets.xcassets in Resources */,
 				8682E9F52335C368006EC627 /* Main.storyboard in Resources */,
@@ -327,7 +342,6 @@
 				8682EA242336B09C006EC627 /* MainTabController.swift in Sources */,
 				8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */,
 				8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */,
-				8682EA262336B3AC006EC627 /* TaskInProgressViewController.swift in Sources */,
 				8EB843C62336053E0083EC91 /* Equipment.swift in Sources */,
 				8682EA2023362262006EC627 /* TaskInProgress.swift in Sources */,
 			);
@@ -504,7 +518,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = HackRice9/HackRice9.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HackRice9/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -513,6 +530,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rice.HackRice9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -522,7 +540,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = HackRice9/HackRice9.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HackRice9/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -531,6 +552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rice.HackRice9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
