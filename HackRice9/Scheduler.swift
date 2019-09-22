@@ -14,7 +14,7 @@ class Scheduler {
     // Replace String with the corresponding classes
     var unfinishedTasks: [WorkOrder] // Change this to [WorkOrder]
     var unassignedWorkers: [Worker] // ... to [Worker]
-    var tip: TaskInProgress    // ... to [TaskInProgress]
+    var tip: [TaskInProgress]    // ... to [TaskInProgress]
     let order1 = [WorkOrder(orderNum: "1001",facNum: 1,equipmentType: "Pump",equipmentID: "P032",priority: 5,timeToComplete: 3)]
     let bob = Worker(equipment: ["Sensor", "Security", "Networking"], name: "Bob", shifts: "Morning")
     let workers = [Worker(equipment: ["Sensor", "Security", "Networking"], name: "Bob", shifts: "Morning")]
@@ -23,7 +23,7 @@ class Scheduler {
     init() {
         self.unfinishedTasks = order1
         self.unassignedWorkers = workers
-        self.tip = TaskInProgress(task: order2, worker: bob)
+        self.tip = [TaskInProgress(task: order2, worker: bob), TaskInProgress(task: order2, worker: bob)]
     }
     
     

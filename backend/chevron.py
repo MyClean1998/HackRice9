@@ -3,23 +3,27 @@ import pandas as pd
 from workScheduling import WorkSchedulingState
 from qlearningAgent import QLearningAgent
 import copy
+import numpy as np
 
 
 class Chevron:
-    def __init__(self, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
-        self.equip_failure_prob = {}
-        self.equip_fixing_time = {}
+    def __init__(self, agent, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
 
-        self.fac_loc = {}
-        self.fac_equip_info = {}
+        self.fac_info = []
+        self.equip_info = {}
+        self.equips = {}
+        self.workers = []
+        self.working_orders = []
 
         self.workOrder_id = 1
-        self.agent = QLearningAgent(0.9, 0.1, 0.1, 1000, sess, is_training)
+        self.agent = agent
+        self.equipment_names = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
         
         self.equipment_file = equipment_file
         self.facility_file = facility_file
         self.worker_file = worker_file
         self.workOrder_file = workOrder_file
+        self.time_step = 0
         
     
     def __str__(self):
@@ -27,55 +31,41 @@ class Chevron:
     
     def initialize(self):
         self.load_facility_equipment_info(self.equipment_file, self.facility_file)
-        facilities = self.initialize_facility()
-        workers = self.initialize_workers(self.worker_file)
-        work_orders = self.initialize_work_orders(self.workOrder_file, 0)
-        self.work_state = WorkSchedulingState(workers, facilities, work_orders)
+        self.initialize_workers(self.worker_file)
+        self.initialize_work_orders(self.workOrder_file, 0)
+        self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
         self.work_state.generate_action()
         self.agent.set_evoke_func(lambda action: self.update_work_state(action))
-
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
         facility_df = pd.read_csv(facility_file, header=1).iloc[:, 1:]
 
-        for idx, row in equipment_df.iterrows():
-            name = row["Equipment"]
-            failureProb = float(row["Probability of Failure"])
-            fixingTime = list(map(lambda x: int(x), row["Hours to Fix (range)"].split("-")))
-            self.equip_failure_prob[name] = failureProb
-            self.equip_fixing_time[name] = fixingTime
+        fac_num, _ = facility_df.shape
+        equip_type_num, _ = equipment_df.shape
+        for fac_idx in range(fac_num):
+            self.fac_info.append((facility_df.iloc[fac_idx,1], facility_df.iloc[fac_idx,2]))
+        
+        for equip_idx in range(equip_type_num):
+            fix_time_strs = equipment_df.iloc[i, 2].split('-')
+            self.equip_info[equipment_df.iloc[i, 0]] = (equipment_df.iloc[equip_idx, 1], (int(fix_time_strs[0]), int(fix_time_strs[1])))
 
-        for idx, row in facility_df.iterrows():
-            fac_name = row["Facility"]
-            location = (float(row["Latitude"]), float(row["Longitude"]))
-            self.fac_loc[fac_name] = location
-            fac_equip = {}
-            fac_equip_df = equipment_df[["Equipment", fac_name]]
-            for idx, row in fac_equip_df.iterrows():
-                fac_equip[row["Equipment"]] = int(row[fac_name])
-            self.fac_equip_info[fac_name] = fac_equip
-
-    def initialize_facility(self):
-        facilities = []
-        for fac in self.fac_loc.keys():
-            facility = Facility(fac, self.fac_loc[fac], self.fac_equip_info[fac], self.equip_failure_prob, self.equip_fixing_time)
-            facilities.append(facility)
-        return facilities
+        for fac_idx in range(fac_num):
+            for equip_idx in range(equip_type_num):
+                num_equip = equipment_df.iloc[equip_idx, fac_idx + 3]
+                for equip_iter in range(num_equip):
+                    self.equips[(fac_idx, equip_idx, equip_iter)] = (self.equip_info[equipment_df.iloc[equip_idx, 0]], fac_idx)
 
     def initialize_workers(self, worker_file):
-        workers = []
         worker_df = pd.read_csv(worker_file).iloc[:, 1:]
         for idx, row in worker_df.iterrows():
             name = row["Name"]
             certification = row["Equipment Certification(s)"]
             shift = row["Shifts"]
             worker = Worker(name, certification, shift)
-            workers.append(worker)
-        return workers
+            self.workers.append(worker)
     
     def initialize_work_orders(self, workOrder_file, start_time):
-        work_orders = []
         workOrder_df = pd.read_csv(workOrder_file, header=1).iloc[:, 1:]
         for idx, row in workOrder_df.iterrows():
             equipment = row["Equipment Type"]
@@ -84,14 +74,22 @@ class Chevron:
             submission_time = start_time
             work_order = WorkOrder(self.workOrder_id, equipment, priority, duration, submission_time)
             self.workOrder_id += 1
-            work_orders.append(work_order)
-        return work_orders
+            self.work_orders.append(work_order)
 
     def update_work_state(self, action):
         self.agent.do_action(self.work_state)
     
-    def one_timestep_passed(self):
+    def one_timestep_passed(self, new=False):
+        self.time_step += 1
         jobs = self.work_state.get_jobs(job_status="in progress")
+        if random.random() < 0.2 and new:
+            cur_id_str = ''
+            for id_d in np.random.randint(0, 9, size=(10)):
+                cur_id_str += str(id_d)
+            new_equip = random.choice(self.equipment_names)
+            new_pri = random.randint(1, 5)
+            new_dur = random.randint(1, 20)
+            self.work_state.work_orders.append(WorkOrder(cur_id_str,new_equip, new_pri, new_dur, self.time_step))
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)
@@ -105,70 +103,6 @@ class Chevron:
             worker.one_timestep_passed()
         
         self.agent.do_action(self.work_state)
-
-
-
-class Equipment:
-    def __init__(self, name, id, prob_failure, fixing_time, status=0):
-        self.name = name
-        self.prob_failure = prob_failure
-        self.fixing_time = fixing_time
-        self.status = status
-
-    def get_fixing_time(self):
-        return random.randint(*self.fixing_time)
-        
-    def is_available(self):
-        return self.status == 0
-
-    def put_towork(self, hours):
-        self.status = hours
-    
-    def one_timestep_passed(self):
-        # Return whether current equipment is finished
-        if self.status > 0:
-            self.status -= 1
-            if self.status == 0:
-                return True
-        return False
-
-
-class Facility:
-    def __init__(self, name, position, num_equipments, equip_failure_prob, equip_fixing_time):
-        self.name = name
-        self.position = position
-        self.num_equipments = num_equipments
-        self.equipments = {}
-        self.initialize_equipments(equip_failure_prob, equip_fixing_time)
-
-    def initialize_equipments(self, equip_failure_prob, equip_fixing_time):
-        for equip_name in self.num_equipments:
-            num_equipment = self.num_equipments[equip_name]
-            self.equipments[equip_name] = [Equipment(equip_name, i, equip_failure_prob[equip_name], equip_fixing_time[equip_name]) for i in range(num_equipment)]
-
-    def get_all_equipments(self):
-        all_equips = []
-        for equip in self.equipments.values():
-            all_equips += equip
-        return all_equips
-
-    def has_available_equipment(self, equip_name):
-        for equip in self.equipments[equip_name]:
-            if equip.is_available():
-                return True
-        return False
-
-    def put_equipment_towork(self, equip_name, hours):
-        for equip in self.equipments[equip_name]:
-            if equip.is_available():
-                equip.put_towork(hours)
-    
-    def one_timestep_passed(self):
-        state_changed = False
-        equipments = self.get_all_equipments()
-        for equip in equipments:
-            state_changed = state_changed or equip.one_timestep_passed()
-        return state_changed
 
 
 class Worker:

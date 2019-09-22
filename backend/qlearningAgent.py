@@ -5,37 +5,52 @@ from copy import deepcopy
 
 class QLearningAgent:
 
-    def __init__(self, discount, lr, epsilon, num_training, sess, is_training=False):
+    def __init__(self, discount, lr, epsilon, num_training, is_training=False):
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
         self.evoke_envir = None
         self.num_training = num_training
-        self.q_value_model = LinearQScore(110, lr, sess)
+        self.q_value_model = LinearQScore(110, lr)
         self.cur_episode = 0
-        self.equips = []
+        self.equips = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
         self.num_equips = len(self.equips)
         
     def get_q_features(self, state, action):
-        equip_job_todo = state.get_jobs_with_equip("pending")
-        equip_job_doing = state.get_jobs_with_equip("in progress")
+        equip_job_todo = state.get_jobs_with_equip('pending')
+        equip_job_doing = state.get_jobs_with_equip('in progress')
         features = np.zeros((len(equip_job_todo.keys()), 11))
         for i in range(self.num_equips):
+
             jobs_todo = equip_job_todo[self.equips[i]]
-            todo_priorities = [job.priority for job in jobs_todo]
-            todo_duration = [job.duration for job in jobs_todo]
-            todo_waited = [job.waited for job in jobs_todo]
-            features[i, 0] = max(todo_priorities)
-            features[i, 1] = np.mean(todo_priorities)
-            features[i, 2] = max(todo_duration)
-            features[i, 3] = np.mean(todo_duration)
-            features[i, 4] = max(todo_waited)
-            features[i, 5] = np.mean(todo_waited)
-            features[i, 6] = len(equip_job_todo)
-            features[i, 7] = len(state.get_available_workers(self.equips[i]))
+            if jobs_todo == []:
+                features[i, 0] = 0
+                features[i, 1] = 0
+                features[i, 2] = 0
+                features[i, 3] = 0
+                features[i, 4] = 0
+                features[i, 5] = 0
+                features[i, 6] = 0
+            else:
+                todo_priorities = [job.priority for job in jobs_todo]
+                todo_duration = [job.duration for job in jobs_todo]
+                todo_waited = [job.time_waited for job in jobs_todo]
+            
+                features[i, 0] = max(todo_priorities)
+                features[i, 1] = np.mean(todo_priorities)
+                features[i, 2] = max(todo_duration)
+                features[i, 3] = np.mean(todo_duration)
+                features[i, 4] = max(todo_waited)
+                features[i, 5] = np.mean(todo_waited)
+                features[i, 6] = len(equip_job_todo) 
+            features[i, 7] = len(state.get_available_workers(self.equips[i])) 
             features[i, 8] = len(state.get_available_facilities(self.equips[i]))
-            features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
-            features[i, 10] = actions[0].priority
+            ip_rest = [job.time_rest for job in equip_job_doing[self.equips[i]]]
+            if ip_rest == []:
+                features[i, 9] = 0
+            else:
+                features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
+            features[i, 10] = action[0].priority 
         return features.flatten()
     
     def set_evoke_func(self, evoke_func):
@@ -85,7 +100,7 @@ class QLearningAgent:
         self.q_value_model.backward(expected, self.get_q_features(state, action))
 
     def do_action(self, state):
-        print("Doing Action")
+        # print("Doing Action")
         self.cur_episode += 1
         action = self.get_action(state)
         if action == None:
