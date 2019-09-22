@@ -179,31 +179,6 @@
             </objects>
             <point key="canvasLocation" x="711.20000000000005" y="-602.24887556221893"/>
         </scene>
-        <!--Item 1-->
-        <scene sceneID="Rsd-TQ-07z">
-            <objects>
-                <viewController id="9CK-EQ-uNY" customClass="TaskInProgressViewController" customModule="HackRice9" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Bpp-Wi-Tsd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tasks In Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDS-sg-Xq5">
-                                <rect key="frame" x="45" y="72" width="236" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="vON-3P-4xF"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="JEm-Ku-0F7"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PDp-C9-GLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="166.74107142857142"/>
-        </scene>
         <!--Item-->
         <scene sceneID="xga-qC-tPL">
             <objects>
@@ -465,7 +440,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9CK-EQ-uNY" kind="relationship" relationship="viewControllers" id="ujL-of-bus"/>
                         <segue destination="hI5-vx-p2F" kind="relationship" relationship="viewControllers" id="WpL-Uh-5DZ"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dpN-GN-ot6"/>
                         <segue destination="e5H-jQ-Kg6" kind="relationship" relationship="viewControllers" id="qDZ-p8-40G"/>
