@@ -18,21 +18,32 @@ def initialize_chevron():
 
 @app.route("/update", methods=['POST'])
 def update_chevron():
-        print("Update time")
+        print("Update time!")
+        # Process new workers (if any)
         new_stuffs = request.form
-        return build_json(chevron)
 
-def build_json(chevron, actions=None):
+        actions = chevron.one_timestep_passed(new=False)
+        return build_json(chevron, actions)
+
+
+def build_json(chevron, actions=[]):
         update_dict = {}
-        update_dict["workers"] = {}
-        update_dict["work_orders"] = {}
-        update_dict["actions"] = {}
 
-        workers = chevron.work_state.get_workers()
-        work_orders = chevron.work_state.get_work_orders()
-        if actions is not None:
-                pass
+        workers = chevron.work_state.get_available_workers()
+        workers_name = list(map(lambda w: w.name, workers))
+
+        pending_jobs = chevron.work_state.get_pending_jobs()
+        pending_joblist = [job.get_dict() for job in pending_jobs]
+        ip_jobs = chevron.work_state.get_inprogress_jobs()
+        ip_joblist = [job.get_dict() for job in ip_jobs]
+
+        actions_list = list(map(lambda a: {"job_id": a[0].id, "worker_name": a[1].name}, actions))
+        update_dict["actions"] = actions_list
+
+        update_dict["workers"] = workers_name
+        update_dict["work_orders"] = {"pending": pending_joblist, "in_progress": ip_joblist
         update_json = json.dumps(update_dict)
+        print(update_json)
         return update_json
 
         

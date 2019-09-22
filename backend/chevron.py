@@ -14,6 +14,7 @@ class Chevron:
         self.equips = {}
         self.workers = []
         self.work_orders = []
+        self.action_list = []
 
         self.workOrder_id = 1
         self.agent = agent
@@ -34,7 +35,6 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        print("Called")
         self.agent.set_evoke_func(lambda action: self.update_work_state())
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
@@ -54,7 +54,7 @@ class Chevron:
             for equip_idx in range(equip_type_num):
                 num_equip = equipment_df.iloc[equip_idx, fac_idx + 3]
                 for equip_iter in range(num_equip):
-                    self.equips[(fac_idx, equip_idx, equip_iter)] = (self.equip_info[equipment_df.iloc[equip_idx, 0]], fac_idx)
+                    self.equips[(fac_idx, equip_idx, equip_iter)] = (equipment_df.iloc[equip_idx, 0], fac_idx)
 
     def initialize_workers(self, worker_file):
         worker_df = pd.read_csv(worker_file).iloc[:, 1:]
@@ -76,21 +76,22 @@ class Chevron:
             self.workOrder_id += 1
             self.work_orders.append(work_order)
 
-    def update_work_state(self):
+    def update_work_state(self, action):
+        self.action_list.append(action)
         self.agent.do_action(self.work_state)
     
     def one_timestep_passed(self, new=False):
         self.time_step += 1
-        if random.random() < 0.2 and new:
-            cur_id_str = ''
-            for id_d in np.random.randint(0, 9, size=(10)):
-                cur_id_str += str(id_d)
-            new_equip = random.choice(self.equipment_names)
-            new_pri = random.randint(1, 5)
-            new_dur = random.randint(1, 20)
-            self.work_state.work_orders.append(WorkOrder(cur_id_str,new_equip, new_pri, new_dur, self.time_step))
+        if random.random() < 0.2 and self.time_step % 10 == 0 and new:
+            for equip_id in self.equips.keys():
+                equip_name = self.equips[equip_id][0]
+                if random.random() < self.equip_info[equip_name][0]:
+                    new_pri = random.randint(1, 5)
+                    dur_range = self.equip_info[equip_name][1]
+                    new_dur = random.randint(dur_range[0], dur_range[1])
+                    self.work_state.work_orders.append(WorkOrder(equip_id, equip_name, new_pri, new_dur, self.time_step))
 
-        jobs = self.work_state.get_jobs(job_status="in progress")
+        jobs = self.work_state.get_inprogress_jobs()
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)
@@ -98,8 +99,9 @@ class Chevron:
         workers = self.work_state.get_workers()
         for worker in workers:
             worker.one_timestep_passed()
-        
+        self.action_list = []
         self.agent.do_action(self.work_state)
+        return self.action_list
 
 
 class Worker:
@@ -140,6 +142,9 @@ class WorkOrder:
     
     def __str__(self):
         return "[jobid: {}; status: {}; time_rest: {}/{}; equipment: {}; priority: {};  time_waited: {}; submission_time: {}".format(self.id, self.status, self.time_rest, self.duration, self.equipment, self.priority, self.time_waited, self.submission_time)
+
+    def get_dict(self):
+        return {"id": self.id, "equipment": self.equipment, "duration": self.duration, "submission_time": self.submission_time, "status": self.status, "time_rest": self.time_rest}
 
     def is_pending(self):
         return self.status == "pending"

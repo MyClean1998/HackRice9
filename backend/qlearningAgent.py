@@ -53,8 +53,6 @@ class QLearningAgent:
         return features.flatten()
     
     def set_evoke_func(self, evoke_func):
-        print("Setting Evoke Function")
-        print(evoke_func)
         self.evoke_envir = evoke_func
             
     def is_training(self):
