@@ -89,7 +89,7 @@ class Chevron:
                     new_dur = random.randint(dur_range[0], dur_range[1])
                     self.work_state.work_orders.append(WorkOrder(equip_id, equip_name, new_pri, new_dur, self.time_step))
 
-        jobs = self.work_state.get_jobs(job_status="in progress")
+        jobs = self.work_state.get_inprogress_jobs()
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)
