@@ -74,9 +74,6 @@ class Chevron:
 
     def update_work_state(self, action):
         pass
-    
-    def 
-
 
 
 class Equipment:
@@ -147,6 +144,7 @@ class WorkOrder:
         self.duration = duration
         self.submission_time = submission_time
         self.status = status
+        self.time_rest = duration
     
     def is_pending(self):
         return self.status == "pending"
@@ -154,8 +152,12 @@ class WorkOrder:
     def is_in_progress(self):
         return self.status == "in progress"
     
-    def is_finished():
+    def is_finished(self):
         return self.status == "finished"
+
+    def put_in_progress(self):
+        self.status = "in progress"
+    
 
 
 if __name__ == '__main__':
