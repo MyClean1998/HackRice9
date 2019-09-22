@@ -14,6 +14,7 @@ class Chevron:
         self.equips = {}
         self.workers = []
         self.work_orders = []
+        self.action_list = []
 
         self.workOrder_id = 1
         self.agent = agent
@@ -75,7 +76,8 @@ class Chevron:
             self.workOrder_id += 1
             self.work_orders.append(work_order)
 
-    def update_work_state(self):
+    def update_work_state(self, action):
+        self.action_list.append(action)
         self.agent.do_action(self.work_state)
     
     def one_timestep_passed(self, new=False):
@@ -97,8 +99,9 @@ class Chevron:
         workers = self.work_state.get_workers()
         for worker in workers:
             worker.one_timestep_passed()
-        
+        self.action_list = []
         self.agent.do_action(self.work_state)
+        return self.action_list
 
 
 class Worker:
