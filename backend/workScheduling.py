@@ -8,8 +8,18 @@ class WorkSchedulingState:
         self.facilities = facilities 
         self.work_orders = work_orders
 
+    def __str__(self):
+        job_string = list(map(lambda j: str(j), self.get_jobs()))
+        return "\tCurrent Jobs: \n" + "\n\t\t".join(job_string)
+
+    def get_workers(self):
+        return self.workers
+
     def get_available_workers(self, equipment):
         return filter(lambda w: (equipment in w.certification) and (w.is_available()), self.workers)
+
+    def get_facilities(self):
+        return self.facilities
     
     def get_available_facilities(self, equipment):
         return filter(lambda f: f.has_available_equipment(equipment), self.facilities)
@@ -38,6 +48,14 @@ class WorkSchedulingState:
         for equip in equipments:
             equip_job_map[equip] = filter(lambda j: j.equipment == equip, jobs)
         return equip_job_map
+    
+    def delete_jobs(self, job_id):
+        jobs = self.get_jobs()
+        new_jobs = []
+        for job in jobs:
+            if job.id != job_id:
+                new_jobs.append(job)
+        self.work_orders = new_jobs
 
     def update_state(self, action):
         job, fac, worker = action
@@ -59,4 +77,8 @@ class WorkSchedulingState:
         for work in self.work_orders:
             cost += work.priority * (work.waited_time + work.time_rest)
         return -cost
+
+    def generate_action(self):
+        # TODO: this function will be called when the state changed
+        pass
         
