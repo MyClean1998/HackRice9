@@ -34,8 +34,8 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        self.update_work_state()
-        self.agent.set_evoke_func(lambda action: self.update_work_state(action))
+        print("Called")
+        self.agent.set_evoke_func(lambda action: self.update_work_state())
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
