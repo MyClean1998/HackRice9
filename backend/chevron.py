@@ -6,7 +6,7 @@ import copy
 
 
 class Chevron:
-    def __init__(self, sess, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
+    def __init__(self, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
         self.equip_failure_prob = {}
         self.equip_fixing_time = {}
 
