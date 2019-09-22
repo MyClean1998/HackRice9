@@ -1,15 +1,17 @@
 import random
 import numpy as np
+from copy import deepcopy
+from qScoreModel import LinearQScore
 
 class QLearningAgent:
 
-    def __init__(self, discount, lr, epsilon, num_training, evoke_envir, is_training=False):
+    def __init__(self, discount, lr, epsilon, num_training, sess, is_training=False):
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
         self.evoke_envir = None
         self.num_training = num_training
-        self.q_value_model = None
+        self.q_value_model = LinearQScore(110, lr, sess)
         self.cur_episode = 0
         self.equips = []
         self.num_equips = len(self.equips)
@@ -17,7 +19,7 @@ class QLearningAgent:
     def get_q_features(self, state, action):
         equip_job_todo = state.get_jobs_with_equip("pending")
         equip_job_doing = state.get_jobs_with_equip("in progress")
-        features = np.zeros((len(equip_job_todo.keys()), 10))
+        features = np.zeros((len(equip_job_todo.keys()), 11))
         for i in range(self.num_equips):
             jobs_todo = equip_job_todo[self.equips[i]]
             todo_priorities = [job.priority for job in jobs_todo]
@@ -33,6 +35,7 @@ class QLearningAgent:
             features[i, 7] = len(state.get_available_workers(self.equips[i]))
             features[i, 8] = len(state.get_available_facilities(self.equips[i]))
             features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
+            features[i, 10] = actions[0].priority
         return features.flatten()
     
     def set_evoke_func(self, evoke_func):
@@ -45,19 +48,23 @@ class QLearningAgent:
         return not self.is_training
     
     def get_q_value(self, state, action):
-        features = state.get_q_features(state, action)
-        return q_value_model.forward(features)
+        features = self.get_q_features(state, action)
+        return self.q_value_model.forward(features)
 
     def get_legal_actions(self, state):
         return state.get_worker_job_pairs()
 
     def compute_value_from_q_value(self, state):
-        return max(self.get_legal_actions(state).map(lambda action: self.get_q_value(state, action)))
+        if len(self.get_legal_actions(state)) == 0:
+            return 0
+        return max(map(lambda action: self.get_q_value(state, action), self.get_legal_actions(state)))
     
     def compute_action_from_q_value(self, state):
-        sorted_actions = self.get_legal_actions(state).map(lambda action: (action, self.get_q_value(state, action)))
+        sorted_actions = map(lambda action: (action, self.get_q_value(state, action)), self.get_legal_actions(state))
         best_actions = []
         best_val = -float('inf')
+        if sorted_actions == []:
+            return None
         for action, val in sorted_actions:
             if val > best_val:
                 best_actions = [action]
@@ -67,19 +74,29 @@ class QLearningAgent:
         return random.choice(best_actions)
     
     def get_action(self, state):
+        if self.get_legal_actions(state) == []:
+            return None
         if random.random() < self.epsilon:
             return random.choice(self.get_legal_actions(state))
         return self.compute_action_from_q_value(state)
     
     def update(self, state, action, nextState):
-        expected = nextState.get_reward() + self.discount * self.computeValueFromQValues(nextState)
-        self.q_value_model.backward(expected, self.get_q_features(state))
+        expected = nextState.get_reward() + self.discount * self.compute_value_from_q_value(nextState)
+        self.q_value_model.backward(expected, self.get_q_features(state, action))
 
     def do_action(self, state):
+        print("Doing Action")
         self.cur_episode += 1
+        action = self.get_action(state)
+        if action == None:
+            return
         if self.is_training:
-            self.update(state, self.get_action(state), )
-        self.evoke_envir(self.get_action(state))
+            current_state = deepcopy(state)
+            print(current_state)
+            state.update_state(action)
+            print(state)
+            self.update(current_state, action, state)
+        self.evoke_envir(action)
     
 
 

@@ -1,11 +1,12 @@
 import random
 import pandas as pd
 from workScheduling import WorkSchedulingState
+from qlearningAgent import QLearningAgent
 import copy
 
 
 class Chevron:
-    def __init__(self, equipment_file, facility_file, worker_file, workOrder_file):
+    def __init__(self, sess, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
         self.equip_failure_prob = {}
         self.equip_fixing_time = {}
 
@@ -13,16 +14,26 @@ class Chevron:
         self.fac_equip_info = {}
 
         self.workOrder_id = 1
-
-        self.load_facility_equipment_info(equipment_file, facility_file)
-        facilities = self.initialize_facility()
-        workers = self.initialize_workers(worker_file)
-        work_orders = self.initialize_work_orders(workOrder_file, 0)
-        self.work_state = WorkSchedulingState(workers, facilities, work_orders)
-        self.work_state.generate_action()
+        self.agent = QLearningAgent(0.9, 0.1, 0.1, 1000, sess, is_training)
+        
+        self.equipment_file = equipment_file
+        self.facility_file = facility_file
+        self.worker_file = worker_file
+        self.workOrder_file = workOrder_file
+        
     
     def __str__(self):
         return str(self.work_state)
+    
+    def initialize(self):
+        self.load_facility_equipment_info(self.equipment_file, self.facility_file)
+        facilities = self.initialize_facility()
+        workers = self.initialize_workers(self.worker_file)
+        work_orders = self.initialize_work_orders(self.workOrder_file, 0)
+        self.work_state = WorkSchedulingState(workers, facilities, work_orders)
+        self.work_state.generate_action()
+        self.agent.set_evoke_func(lambda action: self.update_work_state(action))
+
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
@@ -77,7 +88,7 @@ class Chevron:
         return work_orders
 
     def update_work_state(self, action):
-        self.work_state.update_state(action)
+        self.agent.do_action(self.work_state)
     
     def one_timestep_passed(self):
         state_changed = False
@@ -96,8 +107,7 @@ class Chevron:
         for worker in workers:
             state_changed = state_changed or worker.one_timestep_passed()
         
-        if state_changed:
-            self.work_state.generate_action()
+        self.agent.do_action(self.work_state)
 
 
 
