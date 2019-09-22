@@ -17,7 +17,7 @@ class TaskInProgress {
     init(task: WorkOrder, worker: Worker) {
         self.task = task
         self.worker = worker
-        self.timeLeft = 0
+        self.timeLeft = task.timeToComplete
         self.status = "IP"
     }
 }
