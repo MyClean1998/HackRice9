@@ -9,7 +9,7 @@
 import UIKit
 
 class WorkersViewCell: UICollectionViewCell {
-    
+//
     @IBOutlet weak var workerLabel: UILabel!
     //    @IBOutlet weak var workerLabel: UILabel!
     @IBOutlet weak var equipmentCert: UITextView!
