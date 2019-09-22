@@ -58,11 +58,15 @@ class ViewController: UIViewController {
     @IBAction func AddTaskFunc(_ sender: UIButton) {
         scheduler.addSampleTask()
         updateViewFromModel()
+        let tabbar = tabBarController as! MainTabController
+        tabbar.printLogMessage(msg: "Add task")
     }
     
     @IBAction func AddWorkerFunc(_ sender: UIButton) {
         scheduler.addSampleWorker()
         updateViewFromModel()
+        let tabbar = tabBarController as! MainTabController
+        tabbar.printLogMessage(msg: "Add worker")
     }
 }
 
