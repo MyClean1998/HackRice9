@@ -19,7 +19,6 @@ class Chevron:
         work_orders = self.initialize_work_orders(workOrder_file)
         self.work_state = WorkSchedulingState(workers, facilities, work_orders)
 
-
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
         facility_df = pd.read_csv(facility_file, header=1).iloc[:, 1:]
@@ -73,7 +72,7 @@ class Chevron:
         return work_orders
 
     def update_work_state(self, action):
-        pass
+        self.work_state.update_state(action)
 
 
 class Equipment:
@@ -88,6 +87,10 @@ class Equipment:
 
     def put_towork(self, hours):
         self.status = hours
+    
+    def one_timestep_passed(self):
+        if not self.is_available:
+            self.status -= 1
     
     def is_available(self):
         return self.status == 0
@@ -135,6 +138,10 @@ class Worker:
     def put_towork(self, hours):
         self.status = hours
     
+    def one_timestep_passed(self):
+        if not self.is_available:
+            self.status -= 1
+    
 
 class WorkOrder:
     def __init__(self, id, equipment, priority, duration, submission_time, status="pending"):
@@ -151,14 +158,18 @@ class WorkOrder:
     
     def is_in_progress(self):
         return self.status == "in progress"
-    
-    def is_finished(self):
-        return self.status == "finished"
+
+    def put_pending(self):
+        self.status = "pending"
 
     def put_in_progress(self):
         self.status = "in progress"
     
-
+    def one_timestep_passed(self):
+        if self.is_in_progress():
+            self.time_rest -= 1
+    
+    
 
 if __name__ == '__main__':
     chevron = Chevron("equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")

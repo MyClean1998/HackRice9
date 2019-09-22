@@ -8,7 +8,7 @@ class WorkSchedulingState:
         self.facilities = facilities 
         self.work_orders = work_orders
 
-    def get_available_worker(self, equipment):
+    def get_available_workers(self, equipment):
         return filter(lambda w: (equipment in w.certification) and (w.is_available()), self.workers)
     
     def get_available_facilities(self, equipment):
@@ -44,7 +44,7 @@ class WorkSchedulingState:
             equip_job_map[equip] = filter(lambda j: j.equipment == equip, jobs)
         return equip_job_map
 
-    def get_next_state(self, action):
+    def update_state(self, action):
         job, fac, worker = action
         fac.put_equipment_towork(job.equipment, job.duration)
         worker.put_towork(job.duration)
