@@ -11,25 +11,24 @@ import UIKit
 
 class UnassignedTaskController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate  {
     
-    let taskNum = ["T1", "T2", "T3"]
-    
     let availableWorkers = ["Bob", "Lucy","Aaron"]
 
+    var scheduler: Scheduler!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     // Unassigned Task Page
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return taskNum.count
+        return scheduler.unfinishedTasks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UnassignedTaskCell
         
-        cell.taskNum.text = taskNum[indexPath.row]
+        cell.taskNum.text = scheduler.unfinishedTasks[indexPath.row].orderNum
         cell.availableWorkers.text = availableWorkers[indexPath.row]
         
         return cell

@@ -358,7 +358,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="vdn-SY-fdP" kind="show" id="Zpx-eO-xql"/>
+                                            <segue destination="vdn-SY-fdP" kind="show" identifier="inProgress" id="Zpx-eO-xql"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -373,7 +373,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FCX-YF-pXZ" kind="show" id="X5m-6l-6Cg"/>
+                                    <segue destination="FCX-YF-pXZ" kind="show" identifier="unassigned" id="X5m-6l-6Cg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCO-S2-HW4">
