@@ -33,7 +33,8 @@ class MainTabController: UITabBarController {
     }
     
     func addTask(workOrder: WorkOrder) {
-        
+        scheduler.addTask(withTaskInfo: workOrder)
+        updateAllViewFromModel()
     }
     
     func updateAllViewFromModel() {

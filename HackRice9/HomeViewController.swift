@@ -23,10 +23,20 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var workerLabel: UILabel!
     
+    @IBOutlet weak var taskFacility: UITextField!
+    
+    @IBOutlet weak var timeToComplete: UITextField!
+    
     @IBAction func AddWorker() {
         tabbar.addWorker(worker: Worker(equipment: [], name: workerNameField.text!, shifts: "morning"))
     }
     
+    @IBAction func addWorkOrder() {
+        let time = Int(timeToComplete.text!)!
+        let newTask: WorkOrder = WorkOrder(orderNum: "testOrder", facNum: Int(taskFacility.text!)!, equipmentType: "testEquip", equipmentID: "testID", priority: 1, timeToComplete: time)
+        
+
+    }
     
     
 }
