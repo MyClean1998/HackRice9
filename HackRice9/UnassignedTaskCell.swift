@@ -13,4 +13,6 @@ class UnassignedTaskCell: UICollectionViewCell {
     @IBOutlet weak var taskNum: UILabel!
     
     @IBOutlet weak var availableWorkers: UILabel!
+    
+    @IBOutlet weak var Priority: UILabel!
 }

@@ -28,9 +28,9 @@ class UnassignedTaskController: UIViewController,UICollectionViewDataSource, UIC
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UnassignedTaskCell
         
-        cell.taskNum.text = scheduler.unfinishedTasks[indexPath.row].orderNum
-        cell.availableWorkers.text = availableWorkers[indexPath.row]
-        
+        cell.taskNum.text = "Task Number: " +  scheduler.unfinishedTasks[indexPath.row].orderNum
+        cell.availableWorkers.text = "Available workers: " +  availableWorkers[indexPath.row]
+        cell.Priority.text = "Priority: " +  String(scheduler.unfinishedTasks[indexPath.row].priority)
         return cell
     }
 
