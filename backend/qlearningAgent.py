@@ -10,14 +10,14 @@ class QLearningAgent:
         self.discount = discount
         self.epsilon = epsilon
         self.evoke_envir = None
-        self.q_value_model = LinearQScore(110, lr)
+        self.q_value_model = LinearQScore(120, lr)
         self.equips = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
         self.num_equips = len(self.equips)
         
     def get_q_features(self, state, action):
         equip_job_todo = state.get_jobs_with_equip('pending')
         equip_job_doing = state.get_jobs_with_equip('in progress')
-        features = np.zeros((len(equip_job_todo.keys()), 11))
+        features = np.zeros((len(equip_job_todo.keys()), 12))
         for i in range(self.num_equips):
 
             jobs_todo = equip_job_todo[self.equips[i]]
@@ -44,13 +44,17 @@ class QLearningAgent:
             features[i, 7] = len(state.get_available_workers(self.equips[i])) 
             ip_rest = [job.time_rest for job in equip_job_doing[self.equips[i]]]
             if ip_rest == []:
-                features[i, 9] = 0
+                features[i, 8] = 0
             else:
-                features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
-            features[i, 10] = action[0].priority 
+                features[i, 8] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
+            features[i, 9] = action[0].priority
+            features[i, 10] = action[0].duration
+            features[i, 11] = action[0].time_waited
         return features.flatten()
     
     def set_evoke_func(self, evoke_func):
+        print("Setting Evoke Function")
+        print(evoke_func)
         self.evoke_envir = evoke_func
             
     def is_training(self):
@@ -98,7 +102,6 @@ class QLearningAgent:
 
     def do_action(self, state):
         # print("Doing Action")
-        self.cur_episode += 1
         action = self.get_action(state)
         if action == None:
             return
