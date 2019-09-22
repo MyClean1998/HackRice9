@@ -94,6 +94,8 @@ class QLearningAgent:
             current_state = deepcopy(state)
             state.update_state(action)
             self.update(current_state, action, state)
+        else:
+            state.update_state(action)
         self.evoke_envir(action)
     
 
