@@ -1,16 +1,11 @@
 import time
 from chevron import Chevron
-import tensorflow as tf
-
 
 def run_simulation():
-        sess = tf.Session()
         chevron = Chevron(sess, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv", is_training=True)
         chevron.initialize()
         start_time = time.time()
         time_step = 0
-        init = tf.global_variables_initializer()
-        sess.run(init)
         print("Current time step: {}".format(time_step))
         print(chevron)
         while True:
