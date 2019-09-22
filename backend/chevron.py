@@ -34,7 +34,6 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        print("Called")
         self.agent.set_evoke_func(lambda action: self.update_work_state())
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
@@ -140,6 +139,9 @@ class WorkOrder:
     
     def __str__(self):
         return "[jobid: {}; status: {}; time_rest: {}/{}; equipment: {}; priority: {};  time_waited: {}; submission_time: {}".format(self.id, self.status, self.time_rest, self.duration, self.equipment, self.priority, self.time_waited, self.submission_time)
+
+    def get_dict(self):
+        return {"id": self.id, "equipment": self.equipment, "duration": self.duration, "submission_time": self.submission_time, "status": self.status, "time_rest": self.time_rest}
 
     def is_pending(self):
         return self.status == "pending"

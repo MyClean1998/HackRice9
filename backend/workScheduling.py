@@ -20,9 +20,13 @@ class WorkSchedulingState:
 
     def get_workers(self):
         return self.workers
-
-    def get_available_workers(self, equipment):
-        return list(filter(lambda w: (equipment in w.certification) and (w.is_available()), self.workers))
+    
+    def get_available_workers(self, equipment=None):
+        if equipment is None:
+            func = lambda w: w.is_available()
+        else:
+            func = lambda w: (equipment in w.certification) and (w.is_available())
+        return list(filter(lambda w: func, self.workers))
 
     def get_pending_jobs(self):
         return list(filter(lambda o: o.is_pending(), self.work_orders))
