@@ -9,13 +9,10 @@ def run_simulation():
         chevron.initialize()
         start_time = time.time()
         time_step = 0
-<<<<<<< HEAD
         init = tf.global_variables_initializer()
         sess.run(init)
-=======
         print("Current time step: {}".format(time_step))
         print(chevron)
->>>>>>> dc3f42ab42d3834062c0462cd377a1b680674f9c
         while True:
                 if time.time() - start_time >= 5:
                         time_step += 1
