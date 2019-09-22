@@ -22,7 +22,6 @@
 		8682EA22233622D6006EC627 /* WorkOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA21233622D6006EC627 /* WorkOrder.swift */; };
 		8682EA242336B09C006EC627 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA232336B09C006EC627 /* MainTabController.swift */; };
 		8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA2923370B53006EC627 /* HomeViewController.swift */; };
-		86FD83AC2337554800E3891A /* helloworld.py in Resources */ = {isa = PBXBuildFile; fileRef = 86FD83AB2337554800E3891A /* helloworld.py */; };
 		86FD83C623375FF100E3891A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FD83C523375FF100E3891A /* HealthKit.framework */; };
 		8E64624123372DBB000D6A27 /* UnassignedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */; };
 		8E64624323372DCA000D6A27 /* UnassignedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */; };
@@ -299,7 +298,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FD83AC2337554800E3891A /* helloworld.py in Resources */,
 				8682E9FA2335C36B006EC627 /* LaunchScreen.storyboard in Resources */,
 				8682E9F72335C36B006EC627 /* Assets.xcassets in Resources */,
 				8682E9F52335C368006EC627 /* Main.storyboard in Resources */,
