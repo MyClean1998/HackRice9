@@ -90,8 +90,8 @@ class MainTabController: UITabBarController {
     }
     
     func updateAllViewFromModel() {
-        let vc = viewControllers![2] as! ViewController
-        vc.updateViewFromModel()
+//        let vc = viewControllers![2] as! ViewController
+//        vc.updateViewFromModel()
 //        vc.updateModel(newScheduler: scheduler)
     }
 }
