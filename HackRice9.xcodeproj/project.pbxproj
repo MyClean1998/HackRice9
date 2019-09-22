@@ -21,6 +21,8 @@
 		8682EA242336B09C006EC627 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA232336B09C006EC627 /* MainTabController.swift */; };
 		8682EA262336B3AC006EC627 /* TaskInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */; };
 		8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682EA2923370B53006EC627 /* HomeViewController.swift */; };
+		8E64624123372DBB000D6A27 /* UnassignedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */; };
+		8E64624323372DCA000D6A27 /* UnassignedTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */; };
 		8EB843C42335FEA50083EC91 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C32335FEA50083EC91 /* Worker.swift */; };
 		8EB843C62336053E0083EC91 /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C52336053E0083EC91 /* Equipment.swift */; };
 		8EB843C82336095E0083EC91 /* Facility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB843C72336095E0083EC91 /* Facility.swift */; };
@@ -64,6 +66,8 @@
 		8682EA232336B09C006EC627 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInProgressViewController.swift; sourceTree = "<group>"; };
 		8682EA2923370B53006EC627 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnassignedTaskCell.swift; sourceTree = "<group>"; };
+		8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnassignedTaskController.swift; sourceTree = "<group>"; };
 		8EB843C32335FEA50083EC91 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		8EB843C52336053E0083EC91 /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		8EB843C72336095E0083EC91 /* Facility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facility.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 				8682E9F12335C368006EC627 /* ViewController.swift */,
 				8682EA232336B09C006EC627 /* MainTabController.swift */,
 				17274CC12336D6E100326986 /* LogViewController.swift */,
+				8E64624223372DCA000D6A27 /* UnassignedTaskController.swift */,
 				8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */,
 			);
 			path = ViewControllers;
@@ -132,6 +137,7 @@
 				17274CC62336D81D00326986 /* ViewControllers */,
 				8682E9F32335C368006EC627 /* Main.storyboard */,
 				8682EA2923370B53006EC627 /* HomeViewController.swift */,
+				8E64624023372DBB000D6A27 /* UnassignedTaskCell.swift */,
 				8682E9F62335C36B006EC627 /* Assets.xcassets */,
 				8682E9F82335C36B006EC627 /* LaunchScreen.storyboard */,
 				8682E9FB2335C36B006EC627 /* Info.plist */,
@@ -296,10 +302,12 @@
 			files = (
 				8EB843C82336095E0083EC91 /* Facility.swift in Sources */,
 				8682EA22233622D6006EC627 /* WorkOrder.swift in Sources */,
+				8E64624123372DBB000D6A27 /* UnassignedTaskCell.swift in Sources */,
 				8682EA1E2335DDD6006EC627 /* Scheduler.swift in Sources */,
 				17274CC22336D6E100326986 /* LogViewController.swift in Sources */,
 				8EB843C42335FEA50083EC91 /* Worker.swift in Sources */,
 				8682E9F22335C368006EC627 /* ViewController.swift in Sources */,
+				8E64624323372DCA000D6A27 /* UnassignedTaskController.swift in Sources */,
 				8682EA242336B09C006EC627 /* MainTabController.swift in Sources */,
 				8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */,
 				8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */,
