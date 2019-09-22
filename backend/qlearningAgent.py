@@ -7,7 +7,7 @@ class QLearningAgent:
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
-        self.evoke_envir = evoke_envir
+        self.evoke_envir = None
         self.num_training = num_training
         self.q_value_model = None
         self.cur_episode = 0
@@ -16,13 +16,27 @@ class QLearningAgent:
         
     def get_q_features(self, state, action):
         equip_job_todo = state.get_jobs_with_equip("pending")
-        equit_job_doing = state.get_jobs_with_equip("in progress")
-        features = np.zeros((len(equip_job_todo.keys()), 6))
+        equip_job_doing = state.get_jobs_with_equip("in progress")
+        features = np.zeros((len(equip_job_todo.keys()), 10))
         for i in range(self.num_equips):
             jobs_todo = equip_job_todo[self.equips[i]]
-            jobs_doing = equit_job_doing[self.equips[i]]
-            # TODO: put all features into mat
+            todo_priorities = [job.priority for job in jobs_todo]
+            todo_duration = [job.duration for job in jobs_todo]
+            todo_waited = [job.waited for job in jobs_todo]
+            features[i, 0] = max(todo_priorities)
+            features[i, 1] = np.mean(todo_priorities)
+            features[i, 2] = max(todo_duration)
+            features[i, 3] = np.mean(todo_duration)
+            features[i, 4] = max(todo_waited)
+            features[i, 5] = np.mean(todo_waited)
+            features[i, 6] = len(equip_job_todo)
+            features[i, 7] = len(state.get_available_workers(self.equips[i]))
+            features[i, 8] = len(state.get_available_facilities(self.equips[i]))
+            features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
         return features.flatten()
+    
+    def set_evoke_func(self, evoke_func):
+        self.evoke_envir = evoke_func
             
     def is_training(self):
         return self.is_training
@@ -57,14 +71,14 @@ class QLearningAgent:
             return random.choice(self.get_legal_actions(state))
         return self.compute_action_from_q_value(state)
     
-    def update(self, state, action, nextState, reward):
-        expected = reward + self.discount * self.computeValueFromQValues(nextState)
-        self.q_value_model.backward(expected)
+    def update(self, state, action, nextState):
+        expected = nextState.get_reward() + self.discount * self.computeValueFromQValues(nextState)
+        self.q_value_model.backward(expected, self.get_q_features(state))
 
     def do_action(self, state):
         self.cur_episode += 1
         if self.is_training:
-            self.update(state)
+            self.update(state, self.get_action(state), )
         self.evoke_envir(self.get_action(state))
     
 
