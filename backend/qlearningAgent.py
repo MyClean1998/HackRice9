@@ -92,9 +92,7 @@ class QLearningAgent:
             return
         if self.is_training:
             current_state = deepcopy(state)
-            print(current_state)
             state.update_state(action)
-            print(state)
             self.update(current_state, action, state)
         self.evoke_envir(action)
     
