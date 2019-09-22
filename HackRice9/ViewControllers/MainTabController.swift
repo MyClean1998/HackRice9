@@ -13,7 +13,7 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         send(apd: "")
-        timer()
+//        timer()
     }
     
     lazy var scheduler = Scheduler()
@@ -69,7 +69,7 @@ class MainTabController: UITabBarController {
     
     // Print log message in the log panel
     func printLogMessage(msg: String) {
-        let logging = viewControllers![0] as! LogViewController
+        let logging = viewControllers![2] as! LogViewController
         logging.printMsgs(msgs: msg)
         
     }
@@ -80,13 +80,15 @@ class MainTabController: UITabBarController {
     }
     
     func addWorker(worker: Worker) {
-        scheduler.addWorker(withWorkerInfo: worker)
-        updateAllViewFromModel()
+        scheduler.addSampleWorker()
+//        scheduler.addWorker(withWorkerInfo: worker)
+//        updateAllViewFromModel()
     }
     
     func addTask(workOrder: WorkOrder) {
-        scheduler.addTask(withTaskInfo: workOrder)
-        updateAllViewFromModel()
+        scheduler.addSampleTask()
+//        scheduler.addTask(withTaskInfo: workOrder)
+//        updateAllViewFromModel()
     }
     
     func updateAllViewFromModel() {
