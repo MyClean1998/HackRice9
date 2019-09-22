@@ -18,7 +18,7 @@ def run_simulation():
                         time_step += 1
                         print("Current time step: {}".format(time_step))
                         chevron.one_timestep_passed()
-                        # print(chevron)
+                        print(chevron)
                         start_time = time.time()
 
 if __name__ == "__main__":

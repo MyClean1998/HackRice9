@@ -13,7 +13,7 @@ class WorkSchedulingState:
         job_string = list(map(lambda j: str(j), self.get_jobs()))
         return_str = "\tCurrent Jobs: \n\t\t" + "\n\t\t".join(job_string)
         worker_string = list(map(lambda w: str(w), self.get_workers()))
-        return_str += "\tCurrent Workers: \n\t\t" + "\n\t\t".join(worker_string)
+        return_str += "\n\tCurrent Workers: \n\t\t" + "\n\t\t".join(worker_string)
         return return_str
 
     def get_workers(self):
