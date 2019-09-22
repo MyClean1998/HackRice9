@@ -40,7 +40,6 @@ class WorkSchedulingState:
 
     def get_jobs_with_equip(self, job_status=None):
         jobs = self.get_jobs(job_status)
-        equipments = self.get_equipment_list()
         equip_job_map = {}
         for equip in self.equip_info.keys():
             equip_job_map[equip] = list(filter(lambda j: j.equipment == equip, jobs))
@@ -50,6 +49,7 @@ class WorkSchedulingState:
         jobs = self.get_jobs()
         new_jobs = []
         for job in jobs:
+            
             if job.id != job_id:
                 new_jobs.append(job)
         self.work_orders = new_jobs

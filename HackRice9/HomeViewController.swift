@@ -17,15 +17,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         tabbar = tabBarController as! MainTabController
     }
-    
-//    private var scheduler: Scheduler!
-    
+        
     @IBOutlet weak var taskEquipment: UITextField!
     @IBOutlet weak var workerNameField: UITextField!
-    
+
     @IBOutlet weak var workerShift: UITextField!
-    @IBOutlet weak var workerLabel: UILabel!
-    
+
     @IBOutlet weak var taskFacility: UITextField!
     
     //equipment selection

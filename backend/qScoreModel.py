@@ -1,10 +1,8 @@
 import numpy as np
-import tensorflow as tf
 
 class QScoreModel:
 
-    def __init__(self, num_features, lr, sess):
-        self.sess = sess
+    def __init__(self, num_features, lr):
         self.num_features = num_features
         self.learning_rate = lr
 
@@ -16,8 +14,8 @@ class QScoreModel:
 
 class LinearQScore(QScoreModel):
     
-    def __init__(self, num_features, lr, sess):
-        super().__init__(num_features, lr, sess)
+    def __init__(self, num_features, lr):
+        super().__init__(num_features, lr)
         self.weights = np.random.normal(size=(num_features))
         
         

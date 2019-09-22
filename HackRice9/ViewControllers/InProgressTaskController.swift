@@ -19,19 +19,22 @@ class InProgressTaskController: UIViewController,UICollectionViewDataSource, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabbar = tabBarController as! MainTabController
+//        tabbar = tabBarController as! MainTabController
     }
     
     // Unassigned Task Page
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tabbar.scheduler.tip.count
+//        return tabbar.scheduler.tip.count
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! InProgressTaskCell
         
-        cell.taskNum.text = tabbar.scheduler.tip[indexPath.row].task.orderNum
+//        cell.taskNum.text = tabbar.scheduler.tip[indexPath.row].task.orderNum
+        cell.taskNum.text = taskNum[indexPath.row]
+
         cell.availableWorkers.text = availableWorkers[indexPath.row]
         
         return cell
