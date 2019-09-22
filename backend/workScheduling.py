@@ -18,10 +18,8 @@ class WorkSchedulingState:
         actions = []
         for work in self.work_orders:
             equip = work.equipment
-            for fclt in self.facilities:
-                if fclt.has_equipment(equip):
-                    for worker in self.workers:
-                        if equip in worker.certification:
-                            actions.append((work, fclt, worker))
+            for fclt in self.get_available_facilities(equip):
+                for worker in self.get_avaliable_workers(equip):
+                    actions.append((work, fclt, worker))
         return actions
         
