@@ -3,10 +3,11 @@ import pandas as pd
 from workScheduling import WorkSchedulingState
 from qlearningAgent import QLearningAgent
 import copy
+import numpy as np
 
 
 class Chevron:
-    def __init__(self, sess, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
+    def __init__(self, agent, equipment_file, facility_file, worker_file, workOrder_file, is_training=False):
         self.equip_failure_prob = {}
         self.equip_fixing_time = {}
 
@@ -14,12 +15,14 @@ class Chevron:
         self.fac_equip_info = {}
 
         self.workOrder_id = 1
-        self.agent = QLearningAgent(0.9, 0.1, 0.1, 1000, sess, is_training)
+        self.agent = agent
+        self.equipment_names = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
         
         self.equipment_file = equipment_file
         self.facility_file = facility_file
         self.worker_file = worker_file
         self.workOrder_file = workOrder_file
+        self.time_step = 0
         
     
     def __str__(self):
@@ -90,8 +93,17 @@ class Chevron:
     def update_work_state(self, action):
         self.agent.do_action(self.work_state)
     
-    def one_timestep_passed(self):
+    def one_timestep_passed(self, new=False):
+        self.time_step += 1
         jobs = self.work_state.get_jobs(job_status="in progress")
+        if random.random() < 0.2 and new:
+            cur_id_str = ''
+            for id_d in np.random.randint(0, 9, size=(10)):
+                cur_id_str += str(id_d)
+            new_equip = random.choice(self.equipment_names)
+            new_pri = random.randint(1, 5)
+            new_dur = random.randint(1, 20)
+            self.work_state.work_orders.append(WorkOrder(cur_id_str,new_equip, new_pri, new_dur, self.time_step))
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)
