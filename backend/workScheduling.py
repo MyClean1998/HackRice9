@@ -1,4 +1,5 @@
 import time
+from copy import deepcopy
 
 
 class WorkSchedulingState:
@@ -7,7 +8,6 @@ class WorkSchedulingState:
         self.workers = workers 
         self.facilities = facilities 
         self.work_orders = work_orders
-        self.evoke_agent = None
 
     def __str__(self):
         job_string = list(map(lambda j: str(j), self.get_jobs()))
@@ -69,7 +69,6 @@ class WorkSchedulingState:
         fac.put_equipment_towork(job.equipment, job.duration)
         worker.put_towork(job.duration)
         job.put_in_progress()
-        # self.evoke_agent(self)
 
     def get_worker_job_pairs(self):
         actions = []
@@ -83,15 +82,10 @@ class WorkSchedulingState:
     def get_reward(self):
         cost = 0
         for work in self.work_orders:
-            cost += work.priority * (work.waited_time + work.time_rest)
+            cost += work.priority * (work.time_waited + work.time_rest)
         return -cost
 
     def generate_action(self):
         # TODO: this function will be called when the state changed
-        actions = self.get_worker_job_pairs()
-        while len(actions) != 0:
-            self.update_state(actions[0])
-            actions = self.get_worker_job_pairs()
-
-
+        state = deepcopy(self)
         
