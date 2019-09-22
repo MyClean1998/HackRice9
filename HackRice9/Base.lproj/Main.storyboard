@@ -90,6 +90,58 @@
             </objects>
             <point key="canvasLocation" x="230" y="140"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="u1A-ny-wcl">
+            <objects>
+                <viewController id="uxS-co-dOX" customClass="WorkersViewController" customModule="HackRice9" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qWv-3D-JoF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Workers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyH-Fy-BTQ">
+                                <rect key="frame" x="34" y="25" width="193" height="102"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q1N-rT-PpH">
+                                <rect key="frame" x="34" y="145" width="307" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vJK-3o-zgM">
+                                    <size key="itemSize" width="289" height="106"/>
+                                    <size key="estimatedItemSize" width="289" height="106"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="P8Z-jL-6pg">
+                                        <rect key="frame" x="9" y="0.0" width="289" height="106"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hNX-QO-oJq">
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="106"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="289" height="106"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XyH-Fy-BTQ" firstAttribute="leading" secondItem="yue-ty-cYR" secondAttribute="leading" constant="34" id="Gx7-f6-21u"/>
+                            <constraint firstItem="XyH-Fy-BTQ" firstAttribute="top" secondItem="yue-ty-cYR" secondAttribute="top" constant="25" id="N98-S0-iky"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yue-ty-cYR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Udt-9f-Iy9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIN-SW-m9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2.3999999999999999" y="-638.2308845577212"/>
+        </scene>
         <!--Item 2-->
         <scene sceneID="B2O-gT-p5B">
             <objects>
@@ -339,7 +391,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="342" height="232"/>
                                         <connections>
@@ -379,6 +431,7 @@
                         <segue destination="e5H-jQ-Kg6" kind="relationship" relationship="viewControllers" id="qDZ-p8-40G"/>
                         <segue destination="FCX-YF-pXZ" kind="relationship" relationship="viewControllers" id="Ue3-9N-1SB"/>
                         <segue destination="vdn-SY-fdP" kind="relationship" relationship="viewControllers" id="JLH-HI-ob6"/>
+                        <segue destination="uxS-co-dOX" kind="relationship" relationship="viewControllers" id="h7q-Ym-W2D"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZPe-F6-9f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
