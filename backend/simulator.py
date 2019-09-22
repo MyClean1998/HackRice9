@@ -6,6 +6,8 @@ def run_simulation():
         chevron = Chevron("equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
         start_time = time.time()
         time_step = 0
+        print("Current time step: {}".format(time_step))
+        print(chevron)
         while True:
                 if time.time() - start_time >= 5:
                         time_step += 1

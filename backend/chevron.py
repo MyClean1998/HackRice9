@@ -80,24 +80,20 @@ class Chevron:
         self.work_state.update_state(action)
     
     def one_timestep_passed(self):
-        state_changed = False
-
         jobs = self.work_state.get_jobs(job_status="in progress")
         for job in jobs:
             if job.one_timestep_passed():
-                state_changed = True
                 self.work_state.delete_jobs(job.id)
         
         facilities = self.work_state.get_facilities()
         for fac in facilities:
-            state_changed = state_changed or fac.one_timestep_passed()
+            fac.one_timestep_passed()
 
         workers = self.work_state.get_workers()
         for worker in workers:
-            state_changed = state_changed or worker.one_timestep_passed()
+            worker.one_timestep_passed()
         
-        if state_changed:
-            self.work_state.generate_action()
+        self.work_state.generate_action()
 
 
 
@@ -170,9 +166,9 @@ class Worker:
         self.certification = certification
         self.shift = shift
         self.status = status
-
-    def change_status(self, new_status):
-        self.status = new_status
+    
+    def __str__(self):
+        return "[name: {}; status: {}: certification: {}; shift: {}]".format(self.name, self.status, self.certification, self.shift)
     
     def is_available(self):
         return self.status == 0
@@ -182,7 +178,7 @@ class Worker:
     
     def one_timestep_passed(self):
         # Return whether current worker is done his job
-        if not self.is_available:
+        if self.status > 0:
             self.status -= 1
             if self.status == 0:
                 return True
@@ -201,7 +197,7 @@ class WorkOrder:
         self.time_rest = duration
     
     def __str__(self):
-        return "[jobid: {}; status: {}; equipment: {}; priority: {}; time_rest: {}; time_waited: {}; submission_time: {}".format(self.id, self.status, self.equipment, self.priority, self.time_rest, self.time_waited, self.submission_time)
+        return "[jobid: {}; status: {}; time_rest: {}/{}; equipment: {}; priority: {};  time_waited: {}; submission_time: {}".format(self.id, self.status, self.time_rest, self.duration, self.equipment, self.priority, self.time_waited, self.submission_time)
     
     def is_pending(self):
         return self.status == "pending"
