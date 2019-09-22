@@ -32,7 +32,11 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func addWorkOrder() {
-        let time = Int(timeToComplete.text!)!
+        var time: Int
+        if timeToComplete.text == nil {
+            time = 0
+        }
+        time = Int(timeToComplete.text!)!
         let newTask: WorkOrder = WorkOrder(orderNum: "testOrder", facNum: Int(taskFacility.text!)!, equipmentType: "testEquip", equipmentID: "testID", priority: 1, timeToComplete: time)
         
 
