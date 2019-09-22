@@ -1,18 +1,16 @@
 import random
 import numpy as np
 from copy import deepcopy
-from qScoreModel import LinearQScore
+# from qScoreModel import LinearQScore
 
 class QLearningAgent:
 
-    def __init__(self, discount, lr, epsilon, num_training, sess, is_training=False):
+    def __init__(self, discount, lr, epsilon, is_training=False):
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
         self.evoke_envir = None
-        self.num_training = num_training
-        self.q_value_model = LinearQScore(110, lr, sess)
-        self.cur_episode = 0
+        self.q_value_model = LinearQScore(110, lr)
         self.equips = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
         self.num_equips = len(self.equips)
         
