@@ -3,19 +3,16 @@ import time
 
 class WorkSchedulingState:
 
-    def __init__(self, pendin_jobs, idle_workers, idle_equipments, finished_jobs):
-        self.workers = None 
-        self.facilities = None 
-        self.work_orders = None
-
-    def set_work_order(self, work_orders):
+    def __init__(self, workers=[], facilities=[], work_orders=[]):
+        self.workers = workers 
+        self.facilities = facilities 
         self.work_orders = work_orders
+
+    def get_available_worker(self, equipment):
+        return filter(lambda w: (equipment in w.certification) and (w.is_available()), self.workers)
     
-    def set_workers(self, workers):
-        self.workers = workers
-    
-    def set_facilities(self, facilities):
-        self.facilities = facilities
+    def get_available_facilities(self, equipment):
+        return filter(lambda f: f.has_available_equipment(equipment), self.facilities)
 
     def get_worker_job_pairs(self):
         actions = []
