@@ -35,7 +35,7 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        self.agent.set_evoke_func(lambda action: self.update_work_state())
+        self.agent.set_evoke_func(lambda action: self.update_work_state(action))
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
@@ -91,7 +91,7 @@ class Chevron:
                     new_dur = random.randint(dur_range[0], dur_range[1])
                     self.work_state.work_orders.append(WorkOrder(equip_id, equip_name, new_pri, new_dur, self.time_step))
 
-        jobs = self.work_state.get_inprogress_jobs()
+        jobs = self.work_state.get_jobs()
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)

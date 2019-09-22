@@ -1,7 +1,8 @@
 from flask import Flask, request, make_response, render_template
+from qlearningAgent import QLearningAgent
 import json
 # import simulator
-# from chevron import Chevron
+from chevron import Chevron
 
 app = Flask(__name__)
 
@@ -10,19 +11,26 @@ chevron = None
 
 @app.route("/", methods=['POST'])
 def initialize_chevron():
-        # chevron = Chevron("equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
+        global chevron
+        qLearningAgent = QLearningAgent(0.9, 1e-4, 0.1)
+        chevron = Chevron(qLearningAgent, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
+        chevron.initialize()
         print("Initialize Backend")
         print(request.form)
+        print(chevron)
         return build_json(chevron)
 
 
 @app.route("/update", methods=['POST'])
 def update_chevron():
+        global chevron
         print("Update time!")
         # Process new workers (if any)
         new_stuffs = request.form
+        print(new_stuffs)        
 
         actions = chevron.one_timestep_passed(new=False)
+        print(chevron)
         return build_json(chevron, actions)
 
 
@@ -37,13 +45,14 @@ def build_json(chevron, actions=[]):
         ip_jobs = chevron.work_state.get_inprogress_jobs()
         ip_joblist = [job.get_dict() for job in ip_jobs]
 
+        print(actions)
         actions_list = list(map(lambda a: {"job_id": a[0].id, "worker_name": a[1].name}, actions))
         update_dict["actions"] = actions_list
 
         update_dict["workers"] = workers_name
-        update_dict["work_orders"] = {"pending": pending_joblist, "in_progress": ip_joblist
+        update_dict["work_orders"] = {"pending": pending_joblist, "in_progress": ip_joblist}
         update_json = json.dumps(update_dict)
-        print(update_json)
+        # print(update_json)
         return update_json
 
         
