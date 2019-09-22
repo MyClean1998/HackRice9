@@ -13,7 +13,7 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         send(apd: "")
-//        timer()
+        timer()
     }
     
     lazy var scheduler = Scheduler()
