@@ -29,4 +29,4 @@ class LinearQScore(QScoreModel):
     
     def backward(self, expected, features):
         self.sess.run([self.optimizer, self.loss],
-            feed_dict={self.features: expected, self.expected_q: expected})
+            feed_dict={self.features: features, self.expected_q: expected})
