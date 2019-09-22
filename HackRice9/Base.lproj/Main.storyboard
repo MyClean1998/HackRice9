@@ -378,11 +378,78 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dpN-GN-ot6"/>
                         <segue destination="e5H-jQ-Kg6" kind="relationship" relationship="viewControllers" id="qDZ-p8-40G"/>
                         <segue destination="FCX-YF-pXZ" kind="relationship" relationship="viewControllers" id="Ue3-9N-1SB"/>
+                        <segue destination="vdn-SY-fdP" kind="relationship" relationship="viewControllers" id="JLH-HI-ob6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZPe-F6-9f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1688" y="-641"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="WBJ-WG-h6b">
+            <objects>
+                <viewController id="vdn-SY-fdP" customClass="InProgressTaskController" customModule="HackRice9" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vjz-NM-cQn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Awh-nd-49C">
+                                <rect key="frame" x="16" y="51" width="343" height="567"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2l8-t1-g7G">
+                                    <size key="itemSize" width="342" height="239"/>
+                                    <size key="estimatedItemSize" width="342" height="239"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell2" id="Q9t-QK-aXE" customClass="InProgressTaskCell" customModule="HackRice9" customModuleProvider="target">
+                                        <rect key="frame" x="0.5" y="0.0" width="342" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KJp-ec-h6B">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oab-an-DdD">
+                                                    <rect key="frame" x="33" y="25" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Worker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5w-Jd-sue">
+                                                    <rect key="frame" x="33" y="69" width="55" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.82577989679999997" green="0.89480400829999995" blue="0.98902378520000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <size key="customSize" width="342" height="239"/>
+                                        <connections>
+                                            <outlet property="availableWorkers" destination="Y5w-Jd-sue" id="0FU-nW-feH"/>
+                                            <outlet property="taskNum" destination="oab-an-DdD" id="PgE-TM-d0k"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vdn-SY-fdP" id="Ael-R1-B7S"/>
+                                    <outlet property="delegate" destination="vdn-SY-fdP" id="Sle-1Q-JLz"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="UKq-8c-Dt6"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="fxp-Cj-Q5e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y6k-SC-WaB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2565.5999999999999" y="-725.48725637181417"/>
         </scene>
     </scenes>
 </document>
