@@ -58,4 +58,10 @@ class WorkSchedulingState:
                 for worker in self.get_avaliable_workers(equip):
                     actions.append((work, fclt, worker))
         return actions
+    
+    def get_reward(self):
+        cost = 0
+        for work in self.work_orders:
+            cost += work.priority * (work.waited_time + work.time_rest)
+        return -cost
         

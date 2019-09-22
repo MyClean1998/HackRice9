@@ -14,16 +14,16 @@ class QLearningAgent:
         self.equips = []
         self.num_equips = len(self.equips)
         
-    @staticmethod
-    def get_q_features(state, action):
+    def get_q_features(self, state, action):
         equip_job_todo = state.get_jobs_with_equip("pending")
         equit_job_doing = state.get_jobs_with_equip("in progress")
         features = np.zeros((len(equip_job_todo.keys()), 6))
-        for equip in equip_job_todo.keys():
-            features[]
+        for i in range(self.num_equips):
+            jobs_todo = equip_job_todo[self.equips[i]]
+            jobs_doing = equit_job_doing[self.equips[i]]
+            # TODO: put all features into mat
+        return features.flatten()
             
-
-    
     def is_training(self):
         return self.is_training
     
