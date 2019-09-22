@@ -69,7 +69,7 @@ class MainTabController: UITabBarController {
     
     // Print log message in the log panel
     func printLogMessage(msg: String) {
-        let logging = viewControllers![1] as! LogViewController
+        let logging = viewControllers![0] as! LogViewController
         logging.printMsgs(msgs: msg)
         
     }
