@@ -34,7 +34,6 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        print("Called")
         self.agent.set_evoke_func(lambda action: self.update_work_state())
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
@@ -54,7 +53,7 @@ class Chevron:
             for equip_idx in range(equip_type_num):
                 num_equip = equipment_df.iloc[equip_idx, fac_idx + 3]
                 for equip_iter in range(num_equip):
-                    self.equips[(fac_idx, equip_idx, equip_iter)] = (self.equip_info[equipment_df.iloc[equip_idx, 0]], fac_idx)
+                    self.equips[(fac_idx, equip_idx, equip_iter)] = (equipment_df.iloc[equip_idx, 0], fac_idx)
 
     def initialize_workers(self, worker_file):
         worker_df = pd.read_csv(worker_file).iloc[:, 1:]
@@ -81,14 +80,14 @@ class Chevron:
     
     def one_timestep_passed(self, new=False):
         self.time_step += 1
-        if random.random() < 0.2 and new:
-            cur_id_str = ''
-            for id_d in np.random.randint(0, 9, size=(10)):
-                cur_id_str += str(id_d)
-            new_equip = random.choice(self.equipment_names)
-            new_pri = random.randint(1, 5)
-            new_dur = random.randint(1, 20)
-            self.work_state.work_orders.append(WorkOrder(cur_id_str,new_equip, new_pri, new_dur, self.time_step))
+        if random.random() < 0.2 and self.time_step % 10 == 0 and new:
+            for equip_id in self.equips.keys():
+                equip_name = self.equips[equip_id][0]
+                if random.random() < self.equip_info[equip_name][0]:
+                    new_pri = random.randint(1, 5)
+                    dur_range = self.equip_info[equip_name][1]
+                    new_dur = random.randint(dur_range[0], dur_range[1])
+                    self.work_state.work_orders.append(WorkOrder(equip_id, equip_name, new_pri, new_dur, self.time_step))
 
         jobs = self.work_state.get_jobs(job_status="in progress")
         for job in jobs:
