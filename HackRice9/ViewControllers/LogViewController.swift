@@ -16,7 +16,11 @@ class LogViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBOutlet weak var logText: UITextView!
+    func printMsgs(msgs: String) {
+        logText.text = msgs
+    }
+    
     @IBOutlet weak var logging: UILabel!
     /*
     // MARK: - Navigation
