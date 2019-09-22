@@ -83,7 +83,7 @@ class WorkSchedulingState:
         cost = 0
         for work in self.work_orders:
             cost += work.priority * (work.time_waited + work.time_rest)
-        return -cost
+        return -0.1 * cost
 
     def generate_action(self):
         # TODO: this function will be called when the state changed
