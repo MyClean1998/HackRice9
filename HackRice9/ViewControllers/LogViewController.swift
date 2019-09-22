@@ -18,7 +18,7 @@ class LogViewController: UIViewController {
     
     @IBOutlet weak var logText: UITextView!
     func printMsgs(msgs: String) {
-        logText.text = msgs
+        logText.text += msgs
     }
     
     @IBOutlet weak var logging: UILabel!

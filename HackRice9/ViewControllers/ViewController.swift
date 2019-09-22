@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tabbar = tabBarController as! MainTabController
-        tabbar.printLogMessage(msg: "loaded")
+        tabbar.printLogMessage(msg: "loaded \n")
         updateViewFromModel()
     }
     
@@ -65,14 +65,14 @@ class ViewController: UIViewController {
         tabbar.scheduler.addSampleTask()
         updateViewFromModel()
         let tabbar = tabBarController as! MainTabController
-        tabbar.printLogMessage(msg: "Add task")
+        tabbar.printLogMessage(msg: "Add task \n")
     }
     
     @IBAction func AddWorkerFunc(_ sender: UIButton) {
         tabbar.scheduler.addSampleWorker()
         updateViewFromModel()
         let tabbar = tabBarController as! MainTabController
-        tabbar.printLogMessage(msg: "Add worker")
+        tabbar.printLogMessage(msg: "Add worker \n")
     }
 }
 
