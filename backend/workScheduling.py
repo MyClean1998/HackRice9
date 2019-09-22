@@ -19,6 +19,12 @@ class WorkSchedulingState:
 
     def get_worker_job_pairs(self):
         actions = []
-
-    def get_q_features(self):
-        pass
+        for work in self.work_orders:
+            equip = work.equipment
+            for fclt in self.facilities:
+                if fclt.has_equipment(equip):
+                    for worker in self.workers:
+                        if equip in worker.certification:
+                            actions.append((work, fclt, worker))
+        return actions
+        
