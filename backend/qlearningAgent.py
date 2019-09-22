@@ -42,13 +42,14 @@ class QLearningAgent:
                 features[i, 5] = np.mean(todo_waited)
                 features[i, 6] = len(equip_job_todo) 
             features[i, 7] = len(state.get_available_workers(self.equips[i])) 
-            features[i, 8] = len(state.get_available_facilities(self.equips[i]))
             ip_rest = [job.time_rest for job in equip_job_doing[self.equips[i]]]
             if ip_rest == []:
-                features[i, 9] = 0
+                features[i, 8] = 0
             else:
-                features[i, 9] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
-            features[i, 10] = action[0].priority 
+                features[i, 8] = min([job.time_rest for job in equip_job_doing[self.equips[i]]])
+            features[i, 9] = action[0].priority
+            features[i, 10] = action[0].duration
+            features[i, 11] = action[0].time_waited
         return features.flatten()
     
     def set_evoke_func(self, evoke_func):
