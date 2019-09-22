@@ -16,9 +16,17 @@ class LogViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBOutlet weak var logText: UITextView!
+    @IBOutlet var logText: UITextView!
+    
     func printMsgs(msgs: String) {
-        logText.text += msgs
+        if logText == nil {
+            logText = UITextView()
+            logText.text = msgs
+        } else if let text = logText.text {
+            logText.text = text + msgs
+        } else {
+            logText.text = msgs
+        }
     }
     
     @IBOutlet weak var logging: UILabel!
