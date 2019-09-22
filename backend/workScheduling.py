@@ -7,6 +7,7 @@ class WorkSchedulingState:
         self.workers = workers 
         self.facilities = facilities 
         self.work_orders = work_orders
+        self.evoke_agent = None
 
     def get_available_workers(self, equipment):
         return filter(lambda w: (equipment in w.certification) and (w.is_available()), self.workers)
@@ -39,11 +40,15 @@ class WorkSchedulingState:
             equip_job_map[equip] = filter(lambda j: j.equipment == equip, jobs)
         return equip_job_map
 
+    def set_evoke_func(self, evoke_func):
+        self.evoke_agent = evoke_func
+
     def update_state(self, action):
         job, fac, worker = action
         fac.put_equipment_towork(job.equipment, job.duration)
         worker.put_towork(job.duration)
         job.put_in_progress()
+        self.evoke_agent(self)
 
     def get_worker_job_pairs(self):
         actions = []
