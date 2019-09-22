@@ -19,9 +19,6 @@ class WorkSchedulingState:
 
     def get_pending_jobs(self):
         return filter(lambda o: o.is_pending(), self.work_orders)
-    
-    def get_finished_jobs(self):
-        return filter(lambda o: o.is_finished(), self.work_orders)
 
     def get_inprogress_jobs(self):
         return filter(lambda o: o.is_in_progress(), self.work_orders)
@@ -33,8 +30,6 @@ class WorkSchedulingState:
             return self.get_pending_jobs()
         elif job_status == "in progress":
             return self.get_inprogress_jobs()
-        elif job_status == "finished":
-            return self.get_finished_jobs()
 
     def get_jobs_with_equip(self, job_status=None):
         jobs = self.get_jobs(job_status)
