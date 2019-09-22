@@ -126,7 +126,7 @@ class Equipment:
     
     def one_timestep_passed(self):
         # Return whether current equipment is finished
-        if not self.is_available:
+        if self.status > 0:
             self.status -= 1
             if self.status == 0:
                 return True
@@ -189,7 +189,7 @@ class Worker:
     
     def one_timestep_passed(self):
         # Return whether current worker is done his job
-        if not self.is_available:
+        if self.status > 0:
             self.status -= 1
             if self.status == 0:
                 return True
