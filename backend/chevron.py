@@ -13,7 +13,7 @@ class Chevron:
         self.equip_info = {}
         self.equips = {}
         self.workers = []
-        self.working_orders = []
+        self.work_orders = []
 
         self.workOrder_id = 1
         self.agent = agent
@@ -34,8 +34,8 @@ class Chevron:
         self.initialize_workers(self.worker_file)
         self.initialize_work_orders(self.workOrder_file, 0)
         self.work_state = WorkSchedulingState(self.workers, self.equips, self.work_orders, self.equip_info, self.fac_info)
-        self.work_state.generate_action()
-        self.agent.set_evoke_func(lambda action: self.update_work_state(action))
+        print("Called")
+        self.agent.set_evoke_func(lambda action: self.update_work_state())
 
     def load_facility_equipment_info(self, equipment_file, facility_file):
         equipment_df = pd.read_csv(equipment_file, header=1).iloc[:, 1:]
@@ -47,8 +47,8 @@ class Chevron:
             self.fac_info.append((facility_df.iloc[fac_idx,1], facility_df.iloc[fac_idx,2]))
         
         for equip_idx in range(equip_type_num):
-            fix_time_strs = equipment_df.iloc[i, 2].split('-')
-            self.equip_info[equipment_df.iloc[i, 0]] = (equipment_df.iloc[equip_idx, 1], (int(fix_time_strs[0]), int(fix_time_strs[1])))
+            fix_time_strs = equipment_df.iloc[equip_idx, 2].split('-')
+            self.equip_info[equipment_df.iloc[equip_idx, 0]] = (equipment_df.iloc[equip_idx, 1], (int(fix_time_strs[0]), int(fix_time_strs[1])))
 
         for fac_idx in range(fac_num):
             for equip_idx in range(equip_type_num):
@@ -76,12 +76,11 @@ class Chevron:
             self.workOrder_id += 1
             self.work_orders.append(work_order)
 
-    def update_work_state(self, action):
+    def update_work_state(self):
         self.agent.do_action(self.work_state)
     
     def one_timestep_passed(self, new=False):
         self.time_step += 1
-        jobs = self.work_state.get_jobs(job_status="in progress")
         if random.random() < 0.2 and new:
             cur_id_str = ''
             for id_d in np.random.randint(0, 9, size=(10)):
@@ -90,13 +89,11 @@ class Chevron:
             new_pri = random.randint(1, 5)
             new_dur = random.randint(1, 20)
             self.work_state.work_orders.append(WorkOrder(cur_id_str,new_equip, new_pri, new_dur, self.time_step))
+
+        jobs = self.work_state.get_jobs(job_status="in progress")
         for job in jobs:
             if job.one_timestep_passed():
                 self.work_state.delete_jobs(job.id)
-        
-        facilities = self.work_state.get_facilities()
-        for fac in facilities:
-            fac.one_timestep_passed()
 
         workers = self.work_state.get_workers()
         for worker in workers:
@@ -170,7 +167,8 @@ class WorkOrder:
     
 
 if __name__ == '__main__':
-    chevron = Chevron("equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
+    qLearningAgent = QLearningAgent(0.9, 1e-4, 0.1)
+    chevron = Chevron(qLearningAgent, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
     # chevron2 = copy.deepcopy(chevron)
     # chevron2.work_state.workers[0].put_towork(2)
     # print(chevron2.work_state.workers[0].name, chevron2.work_state.workers[0].is_available())

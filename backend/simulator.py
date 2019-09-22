@@ -1,8 +1,11 @@
 import time
 from chevron import Chevron
+from qlearningAgent import QLearningAgent
+
 
 def run_simulation():
-        chevron = Chevron(sess, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv", is_training=True)
+        qLearningAgent = QLearningAgent(0.9, 1e-4, 0.1)
+        chevron = Chevron(qLearningAgent, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
         chevron.initialize()
         start_time = time.time()
         time_step = 0

@@ -28,8 +28,8 @@ def build_json(chevron, actions=None):
         update_dict["work_orders"] = {}
         update_dict["actions"] = {}
 
-        # workers = chevron.get_workers()
-        # work_orders = chevron.get_work_orders()
+        workers = chevron.work_state.get_workers()
+        work_orders = chevron.work_state.get_work_orders()
         if actions is not None:
                 pass
         update_json = json.dumps(update_dict)
