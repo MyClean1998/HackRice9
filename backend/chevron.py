@@ -225,7 +225,7 @@ class WorkOrder:
     def one_timestep_passed(self):
         # Return whether current work order is finished
         if self.is_in_progress():
-            self.time_rest = 1
+            self.time_rest -= 1
             if self.time_rest == 0:
                 return True
         elif self.is_pending():
