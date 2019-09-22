@@ -21,4 +21,20 @@ class MainTabController: UITabBarController {
 //        for v in viewControllers
         
     }
+    
+    func updateModel(newScheduler: Scheduler) {
+        scheduler = newScheduler
+        updateAllViewFromModel()
+    }
+    
+    func addWorker(worker: Worker) {
+        scheduler.addWorker(withWorkerInfo: worker)
+        updateAllViewFromModel()
+    }
+    
+    func updateAllViewFromModel() {
+        let vc = viewControllers![2] as! ViewController
+        vc.updateViewFromModel()
+//        vc.updateModel(newScheduler: scheduler)
+    }
 }
