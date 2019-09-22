@@ -5,7 +5,7 @@ from copy import deepcopy
 
 class QLearningAgent:
 
-    def __init__(self, discount, lr, epsilon, num_training, is_training=False):
+    def __init__(self, discount, lr, epsilon, is_training=False):
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
