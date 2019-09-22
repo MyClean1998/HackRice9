@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17274CC22336D6E100326986 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17274CC12336D6E100326986 /* LogViewController.swift */; };
 		8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682E9EF2335C368006EC627 /* AppDelegate.swift */; };
 		8682E9F22335C368006EC627 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682E9F12335C368006EC627 /* ViewController.swift */; };
 		8682E9F52335C368006EC627 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8682E9F32335C368006EC627 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17274CC12336D6E100326986 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		8682E9EC2335C368006EC627 /* HackRice9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackRice9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8682E9EF2335C368006EC627 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8682E9F12335C368006EC627 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17274CC62336D81D00326986 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8682E9F12335C368006EC627 /* ViewController.swift */,
+				8682EA232336B09C006EC627 /* MainTabController.swift */,
+				17274CC12336D6E100326986 /* LogViewController.swift */,
+				8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		8682E9E32335C368006EC627 = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				8682E9EF2335C368006EC627 /* AppDelegate.swift */,
-				8682E9F12335C368006EC627 /* ViewController.swift */,
+				17274CC62336D81D00326986 /* ViewControllers */,
 				8682E9F32335C368006EC627 /* Main.storyboard */,
 				8682E9F62335C36B006EC627 /* Assets.xcassets */,
 				8682E9F82335C36B006EC627 /* LaunchScreen.storyboard */,
@@ -125,8 +138,6 @@
 				8EB843C72336095E0083EC91 /* Facility.swift */,
 				8682EA1F23362262006EC627 /* TaskInProgress.swift */,
 				8682EA21233622D6006EC627 /* WorkOrder.swift */,
-				8682EA232336B09C006EC627 /* MainTabController.swift */,
-				8682EA252336B3AC006EC627 /* TaskInProgressViewController.swift */,
 			);
 			path = HackRice9;
 			sourceTree = "<group>";
@@ -283,6 +294,7 @@
 				8EB843C82336095E0083EC91 /* Facility.swift in Sources */,
 				8682EA22233622D6006EC627 /* WorkOrder.swift in Sources */,
 				8682EA1E2335DDD6006EC627 /* Scheduler.swift in Sources */,
+				17274CC22336D6E100326986 /* LogViewController.swift in Sources */,
 				8EB843C42335FEA50083EC91 /* Worker.swift in Sources */,
 				8682E9F22335C368006EC627 /* ViewController.swift in Sources */,
 				8682EA242336B09C006EC627 /* MainTabController.swift in Sources */,

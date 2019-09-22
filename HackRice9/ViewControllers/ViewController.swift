@@ -16,11 +16,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         let tabbar = tabBarController as! MainTabController
         scheduler = tabbar.scheduler
+        tabbar.printLogMessage(msg: "loaded")
         updateViewFromModel()
     }
     
-    @IBOutlet weak var taskStack: UIStackView!
-    @IBOutlet weak var workerStack: UIStackView!
+    @IBOutlet var taskStack: UIStackView!
+    @IBOutlet var workerStack: UIStackView!
     
     private var scheduler: Scheduler!
     
@@ -41,21 +42,43 @@ class ViewController: UIViewController {
         }
     
     func updateViewFromModel() {
-        for task in scheduler.UnfinishedTasks {
+        taskStack.removeAllArrangedSubviews()
+        for task in scheduler.unfinishedTasks {
             // TODO: Replace this with a property of task
             taskStack.addArrangedSubview(makeTaskWithText(text: task.orderNum))
         }
+        workerStack.removeAllArrangedSubviews()
         // Do the same intialization for workerStack
-        for worker in scheduler.UnassignedWorkers {
+        for worker in scheduler.unassignedWorkers {
             workerStack.addArrangedSubview(makeWorkerWithText(text: worker.name))
         }
     }
     
     // TODO: AddTask and AddWorker buttons
     @IBAction func AddTaskFunc(_ sender: UIButton) {
+        scheduler.addSampleTask()
+        updateViewFromModel()
     }
     
     @IBAction func AddWorkerFunc(_ sender: UIButton) {
+        scheduler.addSampleWorker()
+        updateViewFromModel()
     }
 }
 
+extension UIStackView {
+    
+    func removeAllArrangedSubviews() {
+        
+        let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
+            self.removeArrangedSubview(subview)
+            return allSubviews + [subview]
+        }
+        
+        // Deactivate all constraints
+        NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))
+        
+        // Remove the views from self
+        removedSubviews.forEach({ $0.removeFromSuperview() })
+    }
+}
