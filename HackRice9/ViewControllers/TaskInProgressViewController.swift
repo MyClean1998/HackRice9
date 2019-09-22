@@ -16,10 +16,16 @@ class TaskInProgressViewController: UIViewController {
         let tabbar = tabBarController as! MainTabController
         scheduler = tabbar.scheduler
 //        updateViewFromModel()
+        timer()
     }
     
     private var scheduler: Scheduler!
     
-    
+    func timer() {
+        Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { (nil) in
+            print("!")
+        }
+    }
+
 
 }
