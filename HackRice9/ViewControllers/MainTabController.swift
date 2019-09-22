@@ -32,6 +32,10 @@ class MainTabController: UITabBarController {
         updateAllViewFromModel()
     }
     
+    func addTask(workOrder: WorkOrder) {
+        
+    }
+    
     func updateAllViewFromModel() {
         let vc = viewControllers![2] as! ViewController
         vc.updateViewFromModel()

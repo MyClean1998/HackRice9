@@ -15,8 +15,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabbar = tabBarController as! MainTabController
-//        scheduler = tabbar.scheduler
-        
     }
     
 //    private var scheduler: Scheduler!
@@ -26,8 +24,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var workerLabel: UILabel!
     
     @IBAction func AddWorker() {
-//        workerLabel.text = workerNameField.text
         tabbar.addWorker(worker: Worker(equipment: [], name: workerNameField.text!, shifts: "morning"))
-//        tabbar.updateModel(newScheduler: scheduler)
     }
+    
+    
+    
 }
