@@ -1,16 +1,15 @@
 import random
 import numpy as np
 from copy import deepcopy
-# from qScoreModel import LinearQScore
+from qScoreModel import LinearQScore
 
 class QLearningAgent:
 
-    def __init__(self, discount, lr, epsilon, num_training, is_training=False):
+    def __init__(self, discount, lr, epsilon, is_training=False):
         self.is_training = is_training
         self.discount = discount
         self.epsilon = epsilon
         self.evoke_envir = None
-        self.num_training = num_training
         self.q_value_model = LinearQScore(110, lr)
         self.cur_episode = 0
         self.equips = ['Pump', 'Compressor', 'Seperator', 'Sensor', 'Security', 'Electricity', 'Networking', 'Vehicle', 'HVAC', 'Conveyer']
@@ -44,7 +43,6 @@ class QLearningAgent:
                 features[i, 5] = np.mean(todo_waited)
                 features[i, 6] = len(equip_job_todo) 
             features[i, 7] = len(state.get_available_workers(self.equips[i])) 
-            features[i, 8] = len(state.get_available_facilities(self.equips[i]))
             ip_rest = [job.time_rest for job in equip_job_doing[self.equips[i]]]
             if ip_rest == []:
                 features[i, 9] = 0
