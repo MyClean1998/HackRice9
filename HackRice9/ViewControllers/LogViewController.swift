@@ -17,6 +17,7 @@ class LogViewController: UIViewController {
     }
     
 
+    @IBOutlet weak var logging: UILabel!
     /*
     // MARK: - Navigation
 
