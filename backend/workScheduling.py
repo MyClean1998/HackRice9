@@ -1,5 +1,6 @@
 import time
 from copy import deepcopy
+import ast
 
 
 class WorkSchedulingState:
@@ -27,6 +28,11 @@ class WorkSchedulingState:
         else:
             func = lambda w: (equipment in w.certification) and (w.is_available())
         return list(filter(func, self.workers))
+    
+    def add_workers(self, new_workers):
+        json = ast.literal_eval(new_workers)
+        print(json)
+
 
     def get_pending_jobs(self):
         return list(filter(lambda o: o.is_pending(), self.work_orders))

@@ -174,8 +174,4 @@ class WorkOrder:
 if __name__ == '__main__':
     qLearningAgent = QLearningAgent(0.9, 1e-4, 0.1)
     chevron = Chevron(qLearningAgent, "equipment.csv", "facility.csv", "worker.csv", "workOrder.csv")
-    # chevron2 = copy.deepcopy(chevron)
-    # chevron2.work_state.workers[0].put_towork(2)
-    # print(chevron2.work_state.workers[0].name, chevron2.work_state.workers[0].is_available())
-    # print(chevron2.work_state.workers[0].name, chevron.work_state.workers[0].is_available())
 
