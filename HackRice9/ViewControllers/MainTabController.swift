@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+//import SwiftyJSON
 
 class MainTabController: UITabBarController {
     override func viewDidLoad() {
@@ -33,7 +34,8 @@ class MainTabController: UITabBarController {
                     print("statusCode: \(response.statusCode)")
                 }
                 if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                    print("data: \(dataString)")
+//                    print("data: \(dataString)")
+                    self.handleResponse(jsonResponse: data)
                 }
             }
         })
@@ -47,13 +49,20 @@ class MainTabController: UITabBarController {
     }
     
     func generateRequest(apd: String) -> URLRequest {
-        let json: [String: Any] = ["newWorkers": ["name": "ABC", "certificates": []],
-                                   ]
+        var workers: [Any] = []
+        for worker in scheduler.unassignedWorkers {
+            var w: [String: Any] = [:]
+            w["name"] = worker.name
+            w["certifates"] = worker.equipment
+            w["shift"] = worker.shifts
+            workers.append(w)
+        }
+        let json: [String: Any] = ["new_workers":workers]
 
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
         // create post request
-        let url = URL(string: "http://10.36.32.6:5050" + apd)!
+        let url = URL(string: "http://10.127.179.51:5050" + apd)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
@@ -63,10 +72,80 @@ class MainTabController: UITabBarController {
         return request
     }
  
-    func handleResponse() {
+    func handleResponse(jsonResponse: Any) {
+        let js = JSON(jsonResponse)
+        var actions = js["actions"]
+        var pending_tasks = js["work_orders"]["pending"]
+        var ip_tasks = js["work_orders"]["in_progress"]
+        var workers = js["workers"]
+        print(actions)
+        print(pending_tasks)
+        print(ip_tasks)
+        print(workers)
+        print("================")
+        var ws:[Worker] = []
+
         
+        for (key,subJson):(String, JSON) in actions {
+            let task = subJson["job_id"]
+            let worker = subJson["worker_name"]
+            scheduler.assignTask(from: getTask(id: String(task.int!)), to: getWorker(name: worker.string!))
+        }
+        
+        
+        var wos:[WorkOrder] = []
+        for (key, subJson):(String, JSON) in pending_tasks {
+            var p1 = String(subJson["id"].int!)
+            var p2 = subJson["equipment"].string!
+            var p3 = "testId"
+            var p4 = subJson["priority"].int!
+            var p5 = subJson["time_rest"].int!
+            var wo = WorkOrder(orderNum: p1, facNum: 1, equipmentType: p2, equipmentID: p3, priority: p4, timeToComplete: p5)
+            wos.append(wo)
+        }
+        scheduler.unfinishedTasks = wos
+        print(wos)
+        
+        var wip:[WorkOrder] = []
+        for (key, subJson):(String, JSON) in pending_tasks {
+            var p1 = String(subJson["id"].int!)
+            var p2 = subJson["equipment"].string!
+            var p3 = "testId"
+            var p4 = subJson["priority"].int!
+            var p5 = subJson["time_rest"].int!
+
+            var timeToComplete = subJson["time_rest"]
+            var wo = WorkOrder(orderNum: p1, facNum: 1, equipmentType: p2, equipmentID: p3, priority: p4, timeToComplete: p5)
+            wip.append(wo)
+        }
+        scheduler.unfinishedTasks = wip
+        print(wip)
+        
+        for (key, subJson):(String, JSON) in workers {
+            ws.append(Worker(equipment: [subJson["certification"].string!], name: subJson["name"].string!, shifts: "morning"))
+        }
+        scheduler.unassignedWorkers = ws
+        print(ws)
     }
     
+    func getWorker(name: String) -> Worker {
+        for w in scheduler.unassignedWorkers {
+            if w.name == name {
+                return w
+            }
+        }
+        return scheduler.workers[0]
+    }
+    
+    func getTask(id: String) -> WorkOrder {
+        for t in scheduler.unfinishedTasks {
+            if t.orderNum == id {
+                return t
+            }
+        }
+        return scheduler.order2
+    }
+        
     // Print log message in the log panel
     func printLogMessage(msg: String) {
         let logging = viewControllers![2] as! LogViewController

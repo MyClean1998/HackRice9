@@ -10,6 +10,7 @@
 		17274CC22336D6E100326986 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17274CC12336D6E100326986 /* LogViewController.swift */; };
 		17274CCA23374AEB00326986 /* WorkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17274CC923374AEB00326986 /* WorkersViewController.swift */; };
 		17274CCC233758DE00326986 /* WorkersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17274CCB233758DE00326986 /* WorkersViewCell.swift */; };
+		8638E6902337A71700D8BCDA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8638E68F2337A71700D8BCDA /* SwiftyJSON.swift */; };
 		8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682E9EF2335C368006EC627 /* AppDelegate.swift */; };
 		8682E9F22335C368006EC627 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682E9F12335C368006EC627 /* ViewController.swift */; };
 		8682E9F52335C368006EC627 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8682E9F32335C368006EC627 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		17274CC12336D6E100326986 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		17274CC923374AEB00326986 /* WorkersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkersViewController.swift; sourceTree = "<group>"; };
 		17274CCB233758DE00326986 /* WorkersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkersViewCell.swift; sourceTree = "<group>"; };
+		8638E68F2337A71700D8BCDA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../SwiftyJSON/Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		8682E9EC2335C368006EC627 /* HackRice9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackRice9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8682E9EF2335C368006EC627 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8682E9F12335C368006EC627 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		8682E9EE2335C368006EC627 /* HackRice9 */ = {
 			isa = PBXGroup;
 			children = (
+				8638E68F2337A71700D8BCDA /* SwiftyJSON.swift */,
 				86FD83C323375FF000E3891A /* HackRice9.entitlements */,
 				8682E9EF2335C368006EC627 /* AppDelegate.swift */,
 				17274CC62336D81D00326986 /* ViewControllers */,
@@ -342,6 +345,7 @@
 				8682EA242336B09C006EC627 /* MainTabController.swift in Sources */,
 				8682E9F02335C368006EC627 /* AppDelegate.swift in Sources */,
 				8682EA2A23370B53006EC627 /* HomeViewController.swift in Sources */,
+				8638E6902337A71700D8BCDA /* SwiftyJSON.swift in Sources */,
 				8EB843C62336053E0083EC91 /* Equipment.swift in Sources */,
 				8682EA2023362262006EC627 /* TaskInProgress.swift in Sources */,
 			);
@@ -528,7 +532,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Rice.HackRice9;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -550,7 +554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Rice.HackRice9;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

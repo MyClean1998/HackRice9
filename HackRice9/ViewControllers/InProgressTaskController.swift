@@ -33,7 +33,7 @@ class InProgressTaskController: UIViewController,UICollectionViewDataSource, UIC
         cell.taskNum.text = "task Number: " +  scheduler.tip[indexPath.row].task.orderNum
 //        cell.taskNum.text = taskNum[indexPath.row]
 
-        cell.availableWorkers.text = "current worker:" +  availableWorkers[indexPath.row]
+        cell.availableWorkers.text = "current worker:" +  scheduler.tip[indexPath.row].worker.name
         cell.priority.text = "Priority: " + String( scheduler.tip[indexPath.row].task.priority)
         cell.timeLeft.text = "Time to Complete: " + String( scheduler.tip[indexPath.row].timeLeft)
         return cell
