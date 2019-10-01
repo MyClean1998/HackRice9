@@ -11,13 +11,13 @@ import UIKit
 class HomeViewController: UIViewController {
 
     var tabbar: MainTabController!
-    @IBOutlet weak var equipmentBox: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tabbar = tabBarController as! MainTabController
     }
-        
+    @IBOutlet weak var equipmentBox: UITextField!
     @IBOutlet weak var taskEquipment: UITextField!
     @IBOutlet weak var workerNameField: UITextField!
     @IBOutlet weak var workerShift: UITextField!
