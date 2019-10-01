@@ -76,20 +76,29 @@ class Chevron:
             self.workOrder_id += 1
             self.work_orders.append(work_order)
 
+    def add_workers(self, new_workers):
+        worker_names = list(map(lambda w: w.name, self.work_state.workers))
+        for worker in new_workers:
+            if worker["name"] not in worker_names:
+                self.work_state.workers.append(Worker(name=worker["name"], certification=worker["certifates"], shift=worker["shift"]))
+
     def update_work_state(self, action):
         self.action_list.append(action)
         self.agent.do_action(self.work_state)
     
     def one_timestep_passed(self, new=False):
         self.time_step += 1
-        if random.random() < 0.2 and self.time_step % 10 == 0 and new:
+        if random.random() < 0.2 and self.time_step % 2 == 0 and new:
             for equip_id in self.equips.keys():
                 equip_name = self.equips[equip_id][0]
                 if random.random() < self.equip_info[equip_name][0]:
                     new_pri = random.randint(1, 5)
                     dur_range = self.equip_info[equip_name][1]
                     new_dur = random.randint(dur_range[0], dur_range[1])
-                    self.work_state.work_orders.append(WorkOrder(equip_id, equip_name, new_pri, new_dur, self.time_step))
+                    self.work_state.work_orders.append(WorkOrder(self.workOrder_id, equip_name, new_pri, new_dur, self.time_step))
+                    self.workOrder_id += 1
+        
+        # if self.time_step
 
         jobs = self.work_state.get_jobs()
         for job in jobs:
@@ -113,6 +122,9 @@ class Worker:
 
     def __str__(self):
         return "[name: {}; status: {}: certification: {}; shift: {}]".format(self.name, self.status, self.certification, self.shift)
+
+    def get_dict(self):
+        return {"name": self.name, "certification": self.certification, "shift": self.shift}
     
     def is_available(self):
         return self.status == 0
@@ -144,7 +156,7 @@ class WorkOrder:
         return "[jobid: {}; status: {}; time_rest: {}/{}; equipment: {}; priority: {};  time_waited: {}; submission_time: {}".format(self.id, self.status, self.time_rest, self.duration, self.equipment, self.priority, self.time_waited, self.submission_time)
 
     def get_dict(self):
-        return {"id": self.id, "equipment": self.equipment, "duration": self.duration, "submission_time": self.submission_time, "status": self.status, "time_rest": self.time_rest}
+        return {"id": self.id, "equipment": self.equipment, "duration": self.duration, "priority": self.priority, "submission_time": self.submission_time, "status": self.status, "time_rest": self.time_rest}
 
     def is_pending(self):
         return self.status == "pending"
